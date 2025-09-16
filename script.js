@@ -4,7 +4,6 @@ const positionsData = {
     TT: {
       A: [
         { name: "1Pos 3Smokes", file: "pos1.html" },
-        { name: "Default Corner", file: "pos2.html" }
       ],
       B: [
         
