@@ -28,12 +28,12 @@ const positionsData = {
   Inferno: {
     TT: {
       A: [
-        { name: "Banana Push", file: "pos1.html" }
+        { name: "Banana Push", file: "pos2.html" }
       ]
     },
     CT: {
       B: [
-        { name: "B Site Defense", file: "pos1.html" }
+        { name: "B Site Defense", file: "pos2.html" }
       ]
     }
   }
