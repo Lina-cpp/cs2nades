@@ -1,27 +1,40 @@
-// --- Hierarchiczny obiekt pozycji TT/CT -> A/B/Mid -> pozycje ---
+// --- Obiekt pozycji z nazwami wyświetlanymi i plikami ---
 const positionsData = {
   Mirage: {
     TT: {
-      A: ["Pozycja1", "Pozycja2"],
-      B: [],
-      Mid: []
+      A: [
+        { name: "1Pos 3Smokes", file: "pos1.html" },
+        { name: "Default Corner", file: "pos2.html" }
+      ],
+      B: [
+        { name: "B Site Push", file: "pos1.html" }
+      ],
+      Mid: [
+        { name: "Mid Control", file: "pos1.html" }
+      ]
     },
     CT: {
-      A: [],
-      B: [],
-      Mid: []
+      A: [
+        { name: "CT Spawn", file: "pos1.html" }
+      ],
+      B: [
+        { name: "B Site Hold", file: "pos1.html" }
+      ],
+      Mid: [
+        { name: "Window Control", file: "pos1.html" }
+      ]
     }
   },
   Inferno: {
     TT: {
-      A: [],
-      B: [],
-      Mid: []
+      A: [
+        { name: "Banana Push", file: "pos1.html" }
+      ]
     },
     CT: {
-      A: [],
-      B: [],
-      Mid: []
+      B: [
+        { name: "B Site Defense", file: "pos1.html" }
+      ]
     }
   }
 };
@@ -35,9 +48,8 @@ let currentSubH4 = null;
 let currentPosLi = null;
 
 // --- Funkcja do ładowania pliku HTML po prawej ---
-function loadContent(map, sub, pos) {
-  const filename = `${sub}_${pos}.html`.toLowerCase().replace(/\s+/g, '_');
-  const url = `maps/${map.toLowerCase()}/${sub}/${pos.toLowerCase().replace(/\s+/g,'_')}.html`;
+function loadContent(map, sub, filename) {
+  const url = `maps/${map.toLowerCase()}/${sub}/${filename}`;
 
   fetch(url)
     .then(response => {
@@ -60,28 +72,19 @@ function populatePositions(map) {
 
     const subSides = positionsData[map][side];
     for (const sub in subSides) {
-      // Nagłówek A/B/Mid
+      // Nagłówek podstrony A/B/Mid
       const h4 = document.createElement('h4');
       h4.textContent = sub;
       h4.style.cursor = "pointer";
 
-      h4.addEventListener('click', () => {
-        // Podświetlenie subside
-        if (currentSubH4) currentSubH4.classList.remove('active-sub');
-        h4.classList.add('active-sub');
-        currentSubH4 = h4;
-      });
-
-      container.appendChild(h4);
-
       // Lista pozycji
       const ul = document.createElement('ul');
-      subSides[sub].forEach(pos => {
+      subSides[sub].forEach(posObj => {
         const li = document.createElement('li');
-        li.textContent = pos;
+        li.textContent = posObj.name;
 
         li.addEventListener('click', () => {
-          loadContent(map, sub, pos);
+          loadContent(map, sub, posObj.file);
 
           // Podświetlenie pozycji
           if (currentPosLi) currentPosLi.classList.remove('active-pos');
@@ -99,6 +102,24 @@ function populatePositions(map) {
         ul.appendChild(li);
       });
 
+      // Początkowo lista zwinięta
+      ul.classList.remove('expanded');
+
+      // Kliknięcie nagłówka rozwija / zwija listę
+      h4.addEventListener('click', () => {
+        if (currentSubH4 && currentSubH4 !== h4) {
+          const prevUl = currentSubH4.nextElementSibling;
+          if (prevUl && prevUl.tagName === 'UL') prevUl.classList.remove('expanded');
+        }
+
+        ul.classList.toggle('expanded');
+
+        if (currentSubH4 && currentSubH4 !== h4) currentSubH4.classList.remove('active-sub');
+        h4.classList.add('active-sub');
+        currentSubH4 = h4;
+      });
+
+      container.appendChild(h4);
       container.appendChild(ul);
     }
   });
@@ -116,14 +137,4 @@ document.querySelectorAll('.maps li').forEach(mapLi => {
 
     populatePositions(mapName);
   });
-});
-
-// --- Wczytanie domyślnej mapy przy starcie ---
-window.addEventListener('DOMContentLoaded', () => {
-  const firstMapLi = document.querySelector('.maps li');
-  if (firstMapLi) {
-    firstMapLi.classList.add('active-map');
-    currentMapLi = firstMapLi;
-    populatePositions(firstMapLi.textContent);
-  }
 });
