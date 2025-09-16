@@ -3,14 +3,15 @@ const positionsData = {
   Mirage: {
     TT: {
       A: [
-        { name: "1Pos 3Smokes", file: "pos1.html" },
-        { name: "Best CT Smoke", file: "bestct.html"}
+        { name: "1 spot - 3 Smokes", file: "pos1.html" },
+        { name: "Best CT Smoke", file: "bestct.html"},
+        { name: "Jungle Smoke", file: "miragejungle.html"}
       ],
       B: [
-        
+        { name: "Nie działa - wiem", file: "miragejungle.html"}
       ],
       Mid: [
-        
+        { name: "Windows/Conn/Short - 1 spot", file: "miragemidsmokes.html"}
       ]
     },
     CT: {
