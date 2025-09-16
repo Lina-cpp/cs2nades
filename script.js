@@ -32,7 +32,12 @@ const positionsData = {
         { name: "Aps OneWay to Site", file: "pos2.html", type:"smoke" },
         { name: "Before Biblia", file: "beforebilblia.html", type:"smoke"},
         { name: "Pit Smoke", file: "pitsmoke.html", type:"smoke"}
-        ]
+        ],
+      B: [],
+      Mid: [
+        {name: "Mid smoke", file: "midsmoke.html", type:"smoke"},
+        {name: "Short smoke", file: "shortsmoke.html", type:"smoke"}
+      ]
     },
     CT: {
       B: [
