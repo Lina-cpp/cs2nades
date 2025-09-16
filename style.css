@@ -32,3 +32,61 @@ pre {
   padding: 10px;
   overflow-x: auto;
 }
+
+
+
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background: #1e1e1e;
+  padding: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+/* Map buttons */
+.map-btn {
+  width: 100%;
+  background: #2c2c2c;
+  color: white;
+  padding: 10px;
+  border: none;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.map-btn:hover {
+  background: #444;
+}
+
+/* Submenu (TT/CT) */
+.submenu {
+  display: none;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+
+.submenu .sub-btn {
+  width: 100%;
+  background: #333;
+  color: #ddd;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.submenu .sub-btn:hover {
+  background: #555;
+}
