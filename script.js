@@ -4,6 +4,7 @@ const positionsData = {
     TT: {
       A: [
         { name: "1Pos 3Smokes", file: "pos1.html" },
+        { name: "Best CT Smoke", file: "bestct.html"}
       ],
       B: [
         
