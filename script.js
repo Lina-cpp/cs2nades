@@ -7,21 +7,21 @@ const positionsData = {
         { name: "Default Corner", file: "pos2.html" }
       ],
       B: [
-        { name: "B Site Push", file: "pos1.html" }
+        
       ],
       Mid: [
-        { name: "Mid Control", file: "pos1.html" }
+        
       ]
     },
     CT: {
       A: [
-        { name: "CT Spawn", file: "pos1.html" }
+        
       ],
       B: [
-        { name: "B Site Hold", file: "pos1.html" }
+        
       ],
       Mid: [
-        { name: "Window Control", file: "pos1.html" }
+        
       ]
     }
   },
@@ -33,7 +33,7 @@ const positionsData = {
     },
     CT: {
       B: [
-        { name: "B Site Defense", file: "pos2.html" }
+        
       ]
     }
   }
