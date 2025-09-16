@@ -11,7 +11,7 @@ const positionsData = {
         { name: "Short/Window/Doors", file: "ShortShopDoors.html", type: "smoke"}
       ],
       Mid: [
-        { name: "1 spot - 3 Smokes", file: "miragemidsmokes.html"}
+        { name: "1 spot - 3 Smokes", file: "miragemidsmokes.html", type:"smoke"}
       ]
     },
     CT: {
@@ -43,7 +43,7 @@ const positionsData = {
     TT: {
       A: [],
       B: [
-        { name: "Heaven Smoke [Spawn]", file: "heaven.html"}
+        { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
         ],
       Mid: []
     },
