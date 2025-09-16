@@ -29,7 +29,9 @@ const positionsData = {
   Inferno: {
     TT: {
       A: [
-        { name: "Banana Push", file: "pos2.html" }
+        { name: "Aps OneWay to Site", file: "pos2.html", type:"smoke" },
+        { name: "Before Biblia", file: "beforebilblia.html", type:"smoke"},
+        { name: "Pit Smoke", file: "pitsmoke.html", type:"smoke"}
         ]
     },
     CT: {
