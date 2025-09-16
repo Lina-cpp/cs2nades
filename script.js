@@ -28,24 +28,28 @@ const positionsData = {
     TT: {
       A: [
         { name: "Banana Push", file: "pos2.html" }
-      ]
+        ]
     },
     CT: {
       B: [
         
-      ]
+        ]
     }
   },
 
   Overpass: {
     TT: {
-      A: [
-        {}
-      ],
+      A: [],
       B: [
         { name: "Heaven Smoke [Spawn]", file: "heaven.html"}
-      ]
+        ],
+      Mid: []
     },
+    CT:{
+      A: [],
+      B: [],
+      Mid: []
+    }
 
 
   }
