@@ -138,3 +138,9 @@ document.querySelectorAll('.maps li').forEach(mapLi => {
     populatePositions(mapName);
   });
 });
+
+// --- AUTO: wybierz pierwszą mapę po załadowaniu strony ---
+window.addEventListener('DOMContentLoaded', () => {
+  const firstMapLi = document.querySelector('.maps li');
+  if (firstMapLi) firstMapLi.click();
+});
