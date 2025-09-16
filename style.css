@@ -1,4 +1,4 @@
-/* --- Body i nagłówki --- */
+/* --- Body&Headers --- */
 body {
   background-color: #121212;
   color: #e0e0e0;
@@ -6,6 +6,10 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
+}
+
+.details{
+  font-size: 25px;
 }
 
 h1, h2, h3, h4, h5, h6 {
