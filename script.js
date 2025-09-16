@@ -3,25 +3,25 @@ const positionsData = {
   Mirage: {
     TT: {
       A: ["Pozycja1", "Pozycja2"],
-      B: ["Pozycja3", "Pozycja4"],
-      Mid: ["Pozycja5"]
+      B: [],
+      Mid: []
     },
     CT: {
-      A: ["Pozycja6"],
-      B: ["Pozycja7"],
-      Mid: ["Pozycja8"]
+      A: [],
+      B: [],
+      Mid: []
     }
   },
   Inferno: {
     TT: {
-      A: ["Banana"],
-      B: ["SiteB"],
-      Mid: ["Midpoint"]
+      A: [],
+      B: [],
+      Mid: []
     },
     CT: {
-      A: ["A_Site"],
-      B: ["B_Site"],
-      Mid: ["Mid_CT"]
+      A: [],
+      B: [],
+      Mid: []
     }
   }
 };
@@ -37,7 +37,7 @@ let currentPosLi = null;
 // --- Funkcja do ładowania pliku HTML po prawej ---
 function loadContent(map, sub, pos) {
   const filename = `${sub}_${pos}.html`.toLowerCase().replace(/\s+/g, '_');
-  const url = `maps/${map.toLowerCase()}/${filename}`;
+  const url = `maps/${map.toLowerCase()}/${sub}/${pos.toLowerCase().replace(/\s+/g,'_')}.html`;
 
   fetch(url)
     .then(response => {
