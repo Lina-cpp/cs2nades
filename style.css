@@ -125,3 +125,64 @@ pre {
   padding: 10px;
   overflow-x: auto;
 }
+
+
+
+/* --- Nades colors --- */
+/* Border */
+.col.sides ul li {
+  padding-left: 40px;  
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+
+li.smoke {
+  background-color: #333; 
+  color: #fff; 
+}
+
+li.molo {
+  background-color: #ff3333;
+  color: #fff;
+}
+
+li.flash {
+  background-color: #ffff66;
+  color: #000;
+}
+
+li.he {
+  background-color: #33cc33;
+  color: #000;
+}
+
+.col.sides ul li.multi {
+  background-color: #9933ff;
+  color: #fff;
+}
+
+
+
+/* --- Hover --- */
+.col.sides ul li.smoke:hover {
+  background-color: #555;
+}
+
+.col.sides ul li.molo:hover {
+  background-color: #ff6666;
+}
+
+.col.sides ul li.flash:hover {
+  background-color: #ffff99;
+}
+
+.col.sides ul li.he:hover {
+  background-color: #66cc66;
+}
+
+.col.sides ul li.multi:hover {
+  background-color: #bb66ff; 
+}

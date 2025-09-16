@@ -3,12 +3,12 @@ const positionsData = {
   Mirage: {
     TT: {
       A: [
-        { name: "1 spot - 3 Smokes", file: "pos1.html" },
-        { name: "Best CT Smoke", file: "bestct.html"},
-        { name: "Jungle Smoke", file: "miragejungle.html"}
+        { name: "1 spot - 3 Smokes", file: "pos1.html", type: "smoke" },
+        { name: "Best CT Smoke", file: "bestct.html", type: "smoke"},
+        { name: "Jungle Smoke", file: "miragejungle.html", type: "smoke"}
       ],
       B: [
-        { name: "Short/Window/Doors", file: "ShortShopDoors.html"}
+        { name: "Short/Window/Doors", file: "ShortShopDoors.html", type: "smoke"}
       ],
       Mid: [
         { name: "1 spot - 3 Smokes", file: "miragemidsmokes.html"}
@@ -16,7 +16,7 @@ const positionsData = {
     },
     CT: {
       A: [
-        { name: "Ignite from Stairs to Short", file: "shortmolo.html" }
+        { name: "Ignite from Stairs to Short", file: "shortmolo.html", type: "molo"}
       ],
       B: [
         
@@ -101,6 +101,11 @@ function populatePositions(map) {
         const li = document.createElement('li');
         li.textContent = posObj.name;
 
+        // jeśli dany obiekt ma "type", to dodaj klasę CSS
+        if (posObj.type) {
+          li.classList.add(posObj.type);
+        }
+
         li.addEventListener('click', () => {
           loadContent(map, sub, posObj.file);
 
@@ -120,7 +125,6 @@ function populatePositions(map) {
         ul.appendChild(li);
       });
 
-   
       ul.classList.remove('expanded');
 
       h4.addEventListener('click', () => {
@@ -141,6 +145,7 @@ function populatePositions(map) {
     }
   });
 }
+
 
 document.querySelectorAll('.maps li').forEach(mapLi => {
   mapLi.addEventListener('click', () => {
