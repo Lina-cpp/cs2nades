@@ -33,7 +33,11 @@ const positionsData = {
         { name: "Before Biblia", file: "beforebilblia.html", type:"smoke"},
         { name: "Pit Smoke", file: "pitsmoke.html", type:"smoke"}
         ],
-      B: [],
+      B: [
+        { name: "Spawn to CT", file: "ctsmoke4.html", type:"smoke"},
+        { name: "CT+Boost", file: "ctsmokeandboost.html", type:"smoke"},
+        { name: "Coffin", file: "bcoffin.html", type:"smoke"},
+        { name: "Car multinades", file:"bcartositenades.html", type:"multi"}],
       Mid: [
         {name: "Mid smoke", file: "midsmoke.html", type:"smoke"},
         {name: "Short smoke", file: "shortsmoke.html", type:"smoke"}
@@ -41,7 +45,7 @@ const positionsData = {
     },
     CT: {
       B: [
-        
+
         ]
     }
   },
