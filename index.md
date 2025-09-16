@@ -1,22 +1,41 @@
-<!-- Linki, przypięcia etc -->
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>CS2 Nades ~by Lina</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<div class="sidebar">
-  <ul>
-    <li>
-      <button class="map-btn">Mirage</button>
-      <ul class="submenu">
-        <li><button class="sub-btn">TT</button></li>
-        <li><button class="sub-btn">CT</button></li>
-      </ul>
-    </li>
-    <li>
-      <button class="map-btn">Overpass</button>
-      <ul class="submenu">
-        <li><button class="sub-btn">TT</button></li>
-        <li><button class="sub-btn">CT</button></li>
-      </ul>
-    </li>
-  </ul>
+<h1>CS2 Nades ~by Lina</h1>
+
+<div class="container">
+
+  <!-- Kolumna 1: Mapy -->
+  <div class="col maps">
+    <ul>
+      <li>Mirage</li>
+      <li>Inferno</li>
+    </ul>
+  </div>
+
+  <!-- Kolumna 2: TT/CT pozycje z podziałem A/B/Mid -->
+  <div class="col sides">
+    <h3>TT</h3>
+    <div class="subside" id="TT"></div>
+
+    <h3>CT</h3>
+    <div class="subside" id="CT"></div>
+  </div>
+
+  <!-- Kolumna 3: Szczegóły -->
+  <div class="col details">
+    <h3>Wybierz mapę i pozycję</h3>
+    <p>Screeny lub filmiki pojawią się tutaj.</p>
+  </div>
+
 </div>
+
+<script src="script.js"></script>
+</body>
+</html>
