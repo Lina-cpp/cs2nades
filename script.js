@@ -11,12 +11,12 @@ const positionsData = {
         { name: "Short/Window/Doors", file: "ShortShopDoors.html"}
       ],
       Mid: [
-        { name: "Windows/Conn/Short - 1 spot", file: "miragemidsmokes.html"}
+        { name: "Ignite from Stairs to Short", file: "miragemidsmokes.html"}
       ]
     },
     CT: {
       A: [
-        
+        { name: "1 spot - 3 Smokes", file: "shortmolo.html" }
       ],
       B: [
         
