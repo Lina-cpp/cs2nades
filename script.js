@@ -8,7 +8,7 @@ const positionsData = {
         { name: "Jungle Smoke", file: "miragejungle.html"}
       ],
       B: [
-        { name: "Nie działa - wiem", file: "miragejungle.html"}
+        { name: "Short/Window/Doors", file: "ShortShopDoors.html"}
       ],
       Mid: [
         { name: "Windows/Conn/Short - 1 spot", file: "miragemidsmokes.html"}
