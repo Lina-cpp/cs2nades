@@ -26,7 +26,7 @@ h1 { margin-left: 20px; }
   height: 100vh;
 }
 
-/* --- Kolumny --- */
+/* --- Columns --- */
 .col {
   padding: 20px;
   overflow-y: auto;
@@ -37,12 +37,12 @@ h1 { margin-left: 20px; }
 .sides { width: 250px; background: #181818; }
 .details { flex: 1; background: #161616; padding: 20px; }
 
-/* --- Listy w kolumnie map --- */
+/* --- List in Column Map --- */
 .col.maps ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: none; /* widoczne od razu */
+  max-height: none;
 }
 
 .col.maps li {
@@ -55,26 +55,26 @@ h1 { margin-left: 20px; }
   background: #2c2c2c;
 }
 
-/* --- CT / TT nagłówki --- */
+/* --- CT / TT Headers --- */
 .col.sides h3 {
-  font-size: 20px;       /* większy nagłówek */
+  font-size: 20px;       /* Bigger Header */
   margin-left: 0;
   margin-top: 20px;
   margin-bottom: 10px;
   color: #fff;
 }
 
-/* --- A/B/Mid nagłówki --- */
+/* --- A/B/Mid Headers --- */
 .col.sides h4 {
   font-size: 16px;
-  margin-left: 20px;     /* wcięcie od TT/CT */
+  margin-left: 20px;     /* indend TT/CT */
   margin-top: 10px;
   margin-bottom: 4px;
   color: #bbb;
   cursor: pointer;
 }
 
-/* --- Pozycje pod A/B/Mid --- */
+/* --- Indend A/B/Mid --- */
 .col.sides ul {
   list-style: none;
   padding: 0;
@@ -82,8 +82,8 @@ h1 { margin-left: 20px; }
 }
 
 .col.sides ul li {
-  padding-left: 40px;    /* wcięcie od A/B/Mid */
-  font-size: 14px;
+  padding-left: 40px;    /* indend A/B/Mid */
+  font-size: 16px;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -92,7 +92,7 @@ h1 { margin-left: 20px; }
   background: #2c2c2c;
 }
 
-/* --- Podświetlanie aktywnych elementów --- */
+/* --- Active elements glow --- */
 .col.maps li.active-map {
   background-color: #4444aa;
   color: #fff;
@@ -107,7 +107,6 @@ h1 { margin-left: 20px; }
   color: #000;
 }
 
-/* --- Linki i kod, jeśli używasz w szczegółach --- */
 a {
   color: #66ccff;
   text-decoration: none;
