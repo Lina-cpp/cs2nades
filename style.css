@@ -106,6 +106,9 @@ h1 { margin-left: 20px; }
   color: #fff;
 }
 
+
+
+
 .col.sides h4.active-sub { color: #66ccff; }
 
 .col.sides ul li.active-pos {
@@ -116,7 +119,14 @@ h1 { margin-left: 20px; }
 }
 
 
+/* Active highlights with subtle glow */
+li.active-pos {
+  box-shadow: 0 0 10px rgba(102,204,255,0.6), 0 2px 5px rgba(0,0,0,0.4);
+}
 
+li.callouts.active-pos {
+  box-shadow: 0 0 12px rgba(0,179,179,0.7), 0 2px 6px rgba(0,0,0,0.3);
+}
 
 
 
@@ -129,7 +139,7 @@ li.smoke {
 
 li.molo { 
   background: linear-gradient(to right, #b22a2a, #8a1f1f); 
-  color: #fff; 
+  color: #000; 
 }
 
 li.flash { 
@@ -144,7 +154,7 @@ li.he {
 
 li.multi { 
   background: linear-gradient(to right, #9933bf, #6b1fbf); 
-  color: #fff; 
+  color: #000; 
 }
 
 /* --- Hover --- */

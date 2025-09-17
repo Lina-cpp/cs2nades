@@ -7,11 +7,11 @@ const positionsData = {
     TT: {
       A: [
         { name: "CT/Jungle/Stairs | Ramp - 1 spot", file: "pos1.html", type: "smoke" },
-        { name: "Best CT Smoke | Ramp", file: "bestct.html", type: "he"},
-        { name: "Jungle | Ramp", file: "miragejungle.html", type: "flash"}
+        { name: "Best CT Smoke | Ramp", file: "bestct.html", type: "smoke"},
+        { name: "Jungle | Ramp", file: "miragejungle.html", type: "smoke"}
       ],
       B: [
-        { name: "Short/Window/Doors | Snax", file: "ShortShopDoors.html", type: "multi"}
+        { name: "Short/Window/Doors | Snax", file: "ShortShopDoors.html", type: "smoke"}
       ],
       Mid: [
         { name: "Conn/Window/Short | Spawn - 1 spot", file: "miragemidsmokes.html", type:"smoke"}
@@ -26,6 +26,9 @@ const positionsData = {
     }
   },
   Inferno: {
+        Callouts: [
+    { name: "Inferno", file: "infernomap.html", type: "callouts" }
+        ],
     TT: {
       A: [
         { name: "OneWay Site | Aps", file: "pos2.html", type:"smoke" },
