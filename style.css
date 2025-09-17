@@ -1,6 +1,6 @@
 /* --- Body & Headers --- */
 body {
-  background: linear-gradient(120deg, #121212, #1c1c1c);
+  background-color: #121212; /* ciemny grafit, spójny dla całej strony */
   color: #e0e0e0;
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -25,19 +25,22 @@ h1 { margin-left: 20px; }
 
 .maps { 
   width: 180px; 
-  background: linear-gradient(to bottom, #1e1e1e, #232323);
+  /* map gradient */
+  background: linear-gradient(to bottom, #1b1b1b, #23233a);
 }
 
 .sides { 
   width: 250px; 
-  background: linear-gradient(to bottom, #181818, #1d1d1d);
+  /* TT/CT gradient */
+  background: linear-gradient(to bottom, #1a1a1a, #23233a);
 }
 
 .details { 
   flex: 1; 
   padding: 20px; 
   font-size: 30px; 
-  background: linear-gradient(to bottom, #161616, #1b1b1b);
+  /* Details gradient */
+  background: linear-gradient(to bottom, #121212, #23233a);
 }
 
 /* --- Map list --- */
@@ -51,7 +54,7 @@ h1 { margin-left: 20px; }
 }
 
 .col.maps li:hover { 
-  background: #2c2c2c; 
+  background: #2c2c3c; 
 }
 
 /* --- TT/CT headers --- */
@@ -107,24 +110,51 @@ h1 { margin-left: 20px; }
 
 .col.sides ul li.active-pos {
   background: linear-gradient(90deg, #66ccff, #99ddff);
-  color: #000;  /* kontrast dla tekstu */
+  color: #000;
   box-shadow: 0 0 10px rgba(102, 204, 255, 0.6);
   transition: all 0.3s ease;
 }
 
-/* --- Nades colors --- */
-li.smoke { background-color: #333; color: #fff; }
-li.molo { background-color: #ff3333; color: #fff; }
-li.flash { background-color: #ffff66; color: #000; }
-li.he { background-color: #33cc33; color: #000; }
-li.multi { background-color: #9933ff; color: #fff; }
+
+
+
+
+
+
+/* --- Nades colors with subtle left → right gradient --- */
+li.smoke { 
+  background: linear-gradient(to right, #3a3a3a, #2a2a2a); 
+  color: #fff; 
+}
+
+li.molo { 
+  background: linear-gradient(to right, #b22a2a, #8a1f1f); 
+  color: #fff; 
+}
+
+li.flash { 
+  background: linear-gradient(to right, #cccc33, #999900); 
+  color: #000; 
+}
+
+li.he { 
+  background: linear-gradient(to right, #228822, #176617); 
+  color: #000; 
+}
+
+li.multi { 
+  background: linear-gradient(to right, #9933bf, #6b1fbf); 
+  color: #fff; 
+}
 
 /* --- Hover --- */
-li.smoke:hover { background-color: #555; }
-li.molo:hover { background-color: #ff6666; }
-li.flash:hover { background-color: #ffff99; }
-li.he:hover { background-color: #66cc66; }
-li.multi:hover { background-color: #bb66ff; }
+li.smoke:hover { background: linear-gradient(to right, #4a4a4a, #3a3a3a); }
+li.molo:hover { background: linear-gradient(to right, #c33a3a, #9b2626); }
+li.flash:hover { background: linear-gradient(to right, #e6e64d, #bfbf33); }
+li.he:hover { background: linear-gradient(to right, #2aad2a, #1f881f); }
+li.multi:hover { background: linear-gradient(to right, #b366ff, #9933ff); }
+
+
 
 /* --- Filter Buttons --- */
 
@@ -166,43 +196,9 @@ li.multi:hover { background-color: #bb66ff; }
 .filter-he { background-color: #33cc33; color: #000; }
 .filter-multi { background-color: #9933ff; }
 
-/* --- Scroll shadow effect for sides column --- */
-.sides::after {
-  content: "";
-  position: sticky;
-  bottom: 0;
-  display: block;
-  height: 20px;
-  background: linear-gradient(to top, #1d1d1d, transparent);
-}
-
-
 
 /* --- Callouts style --- */
 li.callouts {
-  background: linear-gradient(90deg, #33cccc, #66ffcc); /* turkusowo-miętowy gradient */
-  color: #000;
-  border-radius: 6px;
-  padding: 6px 10px;
-  margin-bottom: 6px;
-  transition: all 0.2s ease;
-}
-
-/* Hover effect */
-li.callouts:hover {
-  opacity: 0.9;
-  box-shadow: 0 0 8px rgba(51, 204, 204, 0.5);
-  transform: scale(1.02);
-}
-
-/* Active highlight for callouts */
-li.callouts.active-pos {
-  background: linear-gradient(90deg, #00b3b3, #33ffcc); /* intensywniejszy turkus */
-  color: #000;
-  box-shadow: 0 0 10px rgba(0, 179, 179, 0.7);
-}
-
-ul.callouts, .col.sides ul li.callout {
   list-style: none; /* usuwa kropki */
   background: linear-gradient(90deg, #ff99cc, #ff66aa); /* gradient */
   color: #000;
@@ -213,25 +209,16 @@ ul.callouts, .col.sides ul li.callout {
   transition: all 0.2s ease;
 }
 
-.col.sides ul li.callout:hover {
-  opacity: 0.9;
-  box-shadow: 0 0 8px rgba(255,153,204,0.5);
-  transform: scale(1.02);
-}
-/* --- Callouts style --- */
-li.callouts {
-  list-style: none; /* remove default dot */
-  background: linear-gradient(90deg, #ff99cc, #ff66aa);
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
+/* Hover effect */
 li.callouts:hover {
   opacity: 0.9;
   box-shadow: 0 0 8px rgba(255,153,204,0.5);
   transform: scale(1.02);
+}
+
+/* Active highlight for callouts */
+li.callouts.active-pos {
+  background: linear-gradient(90deg, #ff66aa, #ff33aa); /* intensywniejszy gradient */
+  color: #000;
+  box-shadow: 0 0 10px rgba(255,102,170,0.7);
 }
