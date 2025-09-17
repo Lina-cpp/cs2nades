@@ -1,4 +1,4 @@
-/* --- Body&Headers --- */
+/* --- Body & Headers --- */
 body {
   background-color: #121212;
   color: #e0e0e0;
@@ -8,17 +8,7 @@ body {
   padding: 0;
 }
 
-.details{
-  font-size: 30px;
-}
-
-
-
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
-
+h1, h2, h3, h4, h5, h6 { margin: 0; }
 h1 { margin-left: 20px; }
 
 .container {
@@ -35,189 +25,83 @@ h1 { margin-left: 20px; }
 
 .maps { width: 180px; background: #1e1e1e; }
 .sides { width: 250px; background: #181818; }
-.details { flex: 1; background: #161616; padding: 20px; }
+.details { flex: 1; background: #161616; padding: 20px; font-size: 30px; }
 
-/* --- List in Column Map --- */
-.col.maps ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: none;
-}
-
+/* --- Map list --- */
+.col.maps ul { list-style: none; padding: 0; margin: 0; }
 .col.maps li {
   padding: 8px;
   cursor: pointer;
   border-radius: 4px;
 }
+.col.maps li:hover { background: #2c2c2c; }
 
-.col.maps li:hover {
-  background: #2c2c2c;
-}
-
-/* --- CT / TT Headers --- */
+/* --- TT/CT headers --- */
 .col.sides h3 {
-  font-size: 20px;       /* Bigger Header */
-  margin-left: 0;
+  font-size: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
   color: #fff;
 }
 
-/* --- A/B/Mid Headers --- */
+/* --- A/B/Mid headers --- */
 .col.sides h4 {
   font-size: 16px;
-  margin-left: 20px;     /* indend TT/CT */
+  margin-left: 20px;
   margin-top: 10px;
   margin-bottom: 4px;
   color: #bbb;
   cursor: pointer;
 }
 
-/* --- Indend A/B/Mid --- */
-.col.sides ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
+/* --- Positions list --- */
+.col.sides ul { list-style: none; padding: 0; margin: 0; }
 .col.sides ul li {
-  padding-left: 40px;    /* indend A/B/Mid */
+  padding-left: 40px;
   font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.col.sides ul li:hover {
-  background: #2c2c2c;
-}
-
-/* --- Active elements glow --- */
-.col.maps li.active-map {
-  background-color: #4444aa;
-  color: #fff;
-}
-
-.col.sides h4.active-sub {
-  color: #66ccff;
-}
-
-.col.sides ul li.active-pos {
-  background-color: #66ccff;
-  color: #000;
-}
-
-a {
-  color: #66ccff;
-  text-decoration: none;
-}
-
-a:hover { text-decoration: underline; }
-
-code, pre {
-  background-color: #1e1e1e;
-  color: #dcdcaa;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-
-pre {
-  padding: 10px;
-  overflow-x: auto;
-}
-
-
-
-/* --- Nades colors --- */
-/* Border */
-.col.sides ul li {
-  padding-left: 40px;  
-  font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
   margin-bottom: 5px;
+  transition: all 0.2s ease;
 }
 
-
-li.smoke {
-  background-color: #333; 
-  color: #fff; 
+/* --- Hover positions --- */
+.col.sides ul li:hover { 
+  opacity: 0.8; 
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
 }
 
-li.molo {
-  background-color: #ff3333;
-  color: #fff;
-}
+/* --- Active highlights --- */
+.col.maps li.active-map { background-color: #4444aa; color: #fff; }
+.col.sides h4.active-sub { color: #66ccff; }
+.col.sides ul li.active-pos { background-color: #66ccff; color: #000; }
 
-li.flash {
-  background-color: #ffff66;
-  color: #000;
-}
+/* --- Nades colors --- */
+li.smoke { background-color: #333; color: #fff; }
+li.molo { background-color: #ff3333; color: #fff; }
+li.flash { background-color: #ffff66; color: #000; }
+li.he { background-color: #33cc33; color: #000; }
+li.multi { background-color: #9933ff; color: #fff; }
 
-li.he {
-  background-color: #33cc33;
-  color: #000;
-}
+li.smoke:hover { background-color: #555; }
+li.molo:hover { background-color: #ff6666; }
+li.flash:hover { background-color: #ffff99; }
+li.he:hover { background-color: #66cc66; }
+li.multi:hover { background-color: #bb66ff; }
 
-.col.sides ul li.multi {
-  background-color: #9933ff;
-  color: #fff;
-}
-
-
-
-/* --- Hover --- */
-.col.sides ul li.smoke:hover {
-  background-color: #555;
-}
-
-.col.sides ul li.molo:hover {
-  background-color: #ff6666;
-}
-
-.col.sides ul li.flash:hover {
-  background-color: #ffff99;
-}
-
-.col.sides ul li.he:hover {
-  background-color: #66cc66;
-}
-
-.col.sides ul li.multi:hover {
-  background-color: #bb66ff; 
-}
-
-
-/* --- Filter Buttons --- */
-
-/* Filters title*/
-.filters-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
+/* --- Filter buttons --- */
 .filters-title {
   margin: 0 0 5px 0;
   color: #66ccff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
-  flex-wrap: wrap;
-}
-
-
-
-/* Filers appearance */
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 15px;
 }
 
@@ -231,15 +115,9 @@ li.he {
   transition: all 0.2s ease;
 }
 
-.filter-btn.active {
-  opacity: 1;
-}
+.filter-btn.inactive { opacity: 0.4; }
 
-.filter-btn.inactive {
-  opacity: 0.4;
-}
-
-/* Colors for buttons - same as grenades */
+/* Colors same as grenades */
 .filter-smoke { background-color: #555; }
 .filter-molo { background-color: #ff3333; }
 .filter-flash { background-color: #e6e600; color: #000; }

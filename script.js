@@ -1,4 +1,4 @@
-// --- Objects with MapNames, pos etc ---
+// --- Objects with MapNames, positions, etc ---
 const positionsData = {
   Mirage: {
     TT: {
@@ -54,11 +54,11 @@ const positionsData = {
   }
 };
 
-// --- Elementy DOM ---
+// --- DOM Elements ---
 const details = document.querySelector('.details');
 const filterButtonsContainer = document.querySelector('.filters');
 
-// --- Vars to track active elements ---
+// --- Track active elements ---
 let currentMapLi = null;
 let currentSubH4 = null;
 let currentPosLi = null;
@@ -72,24 +72,24 @@ const activeFilters = {
   multi: true
 };
 
-// --- Load HTML to files to border on the right ---
+// --- Load HTML into details ---
 function loadContent(map, sub, filename) {
   const url = `maps/${map.toLowerCase()}/${sub}/${filename}`;
 
   fetch(url)
     .then(response => {
-      if (!response.ok) throw new Error('Plik nie znaleziony');
+      if (!response.ok) throw new Error('File not found');
       return response.text();
     })
     .then(html => {
       details.innerHTML = html;
     })
     .catch(err => {
-      details.innerHTML = `<p>Błąd ładowania: ${err}</p>`;
+      details.innerHTML = `<p>Error loading: ${err}</p>`;
     });
 }
 
-// --- Fill columns TT/CT → A/B/Mid → Positions ---
+// --- Populate TT/CT → A/B/Mid → Positions ---
 function populatePositions(map) {
   ['TT','CT'].forEach(side => {
     const container = document.getElementById(side);
@@ -102,25 +102,25 @@ function populatePositions(map) {
       h4.textContent = sub;
       h4.style.cursor = "pointer";
 
-      // Nades positions
+      // Grenade positions
       const ul = document.createElement('ul');
       subSides[sub].forEach(posObj => {
         const li = document.createElement('li');
         li.textContent = posObj.name;
 
-        // jeśli dany obiekt ma "type", to dodaj klasę CSS
+        // Add type class for CSS/filter
         if (posObj.type) li.classList.add(posObj.type);
 
-        // Kliknięcie pozycji
+        // Click to load content
         li.addEventListener('click', () => {
           loadContent(map, sub, posObj.file);
 
-          // Nade highlight
+          // Highlight position
           if(currentPosLi) currentPosLi.classList.remove('active-pos');
           li.classList.add('active-pos');
           currentPosLi = li;
 
-          // subside highlight
+          // Highlight sub header
           if(currentSubH4 !== h4) {
             if(currentSubH4) currentSubH4.classList.remove('active-sub');
             h4.classList.add('active-sub');
@@ -133,7 +133,7 @@ function populatePositions(map) {
 
       ul.classList.remove('expanded');
 
-      // On A/B/Mid click
+      // Expand/collapse A/B/Mid
       h4.addEventListener('click', () => {
         if(currentSubH4 && currentSubH4 !== h4) {
           const prevUl = currentSubH4.nextElementSibling;
@@ -150,7 +150,7 @@ function populatePositions(map) {
     }
   });
 
-  // Apply filter after filling columns
+  // Apply filters after populating
   applyFilters();
 }
 
@@ -167,33 +167,36 @@ document.querySelectorAll('.maps li').forEach(mapLi => {
   });
 });
 
-// --- AUTO: load first page (mirage) ---
+// --- AUTO: load first map (Mirage) ---
 window.addEventListener('DOMContentLoaded', () => {
   const firstMapLi = document.querySelector('.maps li');
   if(firstMapLi) firstMapLi.click();
-  initFilters(); // Inicjalizacja przycisków filtra
+  initFilters(); // Initialize filter buttons
 });
 
-// --- Filtrs ---
-// Make clicking in buttons work
+// --- Filters ---
+// Initialize filter buttons
 function initFilters() {
   document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const type = btn.dataset.type;
+    const type = btn.dataset.type;
 
-      // switch filter
+    // Set initial appearance based on activeFilters
+    if(!activeFilters[type]) btn.classList.add('inactive');
+
+    btn.addEventListener('click', () => {
+      // Toggle filter
       activeFilters[type] = !activeFilters[type];
 
-      // appearance
+      // Toggle button appearance
       btn.classList.toggle('inactive', !activeFilters[type]);
 
-      // apply filters
+      // Apply filter
       applyFilters();
     });
   });
 }
 
-// Hide/Show filtred grenades
+// --- Apply filters ---
 function applyFilters() {
   document.querySelectorAll('.sides li').forEach(li => {
     const classes = li.classList;
