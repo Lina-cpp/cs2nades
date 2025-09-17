@@ -30,7 +30,7 @@ h1 { margin-left: 20px; }
 }
 
 .sides { 
-  width: 300px; 
+  width: 310px; 
   /* TT/CT gradient */
   background: linear-gradient(to bottom, #1a1a1a, #23233a);
 }

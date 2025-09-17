@@ -62,37 +62,38 @@ const positionsData = {
 
   
   Overpass: {
-    wip: true,
+      wip: true,
       Callouts: [
     { name: "Overpass", file: "overpass.html", type: "callouts" }
         ],
     TT: {
-      A: [],
       B: [
         { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
       ],
-      Mid: []
     },
-    CT: { A: [], B: [], Mid: [] }
   },
 
 
 
     Nuke: {
-    wip: true,
     Callouts: [
     { name: "Nuke", file: "nuke.html", type: "callouts" }
         ],
     TT: {
-      A: [],
-      B: [],
-      Mid: []
+      A: 
+      [
+        {name:"Heaven | Spawn", file:"nukeheaven.html", type:"smoke"},
+        {name: "Vent Rush | Spawn", file: "ventrush.html", type:"smoke"}
+      ],
+      Outside:
+      [
+        {name: "Outside 3x | Spawn", file:"oustidetriple.html", type:"smoke"},
+        {name: "Outside 2x | Spawn", file:"outsidedouble.html", type:"smoke"},
+        {name: "Front Red | Spawn", file:"oustidered.html", type:"smoke"},
+        {name: "Red w biegu | Spawn", file:"redrun.html", type:"smoke"}
+      ]
     },
-    CT: { 
-      A: [], 
-      B: [], 
-      Mid: [] 
-    }
+
   },
 
 
