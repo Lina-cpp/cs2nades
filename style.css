@@ -190,6 +190,30 @@ li.he {
 
 /* --- Filter Buttons --- */
 
+/* Filters title*/
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.filters-title {
+  margin: 0 0 5px 0;
+  color: #66ccff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+
+
+/* Filers appearance */
+
 .filters {
   display: flex;
   flex-wrap: wrap;

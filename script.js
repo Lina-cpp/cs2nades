@@ -18,12 +18,8 @@ const positionsData = {
       A: [
         { name: "Ignite from Stairs to Short", file: "shortmolo.html", type: "molo"}
       ],
-      B: [
-        
-      ],
-      Mid: [
-        
-      ]
+      B: [],
+      Mid: []
     }
   },
   Inferno: {
@@ -32,49 +28,49 @@ const positionsData = {
         { name: "Aps OneWay to Site", file: "pos2.html", type:"smoke" },
         { name: "Before Biblia", file: "beforebilblia.html", type:"smoke"},
         { name: "Pit Smoke", file: "pitsmoke.html", type:"smoke"}
-        ],
+      ],
       B: [
         { name: "Spawn to CT", file: "ctsmoke4.html", type:"smoke"},
         { name: "CT+Boost", file: "ctsmokeandboost.html", type:"smoke"},
         { name: "Coffin", file: "bcoffin.html", type:"smoke"},
-        { name: "Car multinades", file:"bcartositenades.html", type:"multi"}],
+        { name: "Car multinades", file:"bcartositenades.html", type:"multi"}
+      ],
       Mid: [
         {name: "Mid smoke", file: "midsmoke.html", type:"smoke"},
         {name: "Short smoke", file: "shortsmoke.html", type:"smoke"}
       ]
     },
-    CT: {
-      B: [
-
-        ]
-    }
+    CT: { B: [] }
   },
-
   Overpass: {
     TT: {
       A: [],
       B: [
         { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
-        ],
+      ],
       Mid: []
     },
-    CT:{
-      A: [],
-      B: [],
-      Mid: []
-    }
-
-
+    CT: { A: [], B: [], Mid: [] }
   }
 };
 
 // --- Elementy DOM ---
 const details = document.querySelector('.details');
+const filterButtonsContainer = document.querySelector('.filters');
 
 // --- Vars to track active elements ---
 let currentMapLi = null;
 let currentSubH4 = null;
 let currentPosLi = null;
+
+// --- Global filters state ---
+const activeFilters = {
+  smoke: true,
+  molo: true,
+  flash: true,
+  he: true,
+  multi: true
+};
 
 // --- Load HTML to files to border on the right ---
 function loadContent(map, sub, filename) {
@@ -113,21 +109,20 @@ function populatePositions(map) {
         li.textContent = posObj.name;
 
         // jeśli dany obiekt ma "type", to dodaj klasę CSS
-        if (posObj.type) {
-          li.classList.add(posObj.type);
-        }
+        if (posObj.type) li.classList.add(posObj.type);
 
+        // Kliknięcie pozycji
         li.addEventListener('click', () => {
           loadContent(map, sub, posObj.file);
 
           // Nade highlight
-          if (currentPosLi) currentPosLi.classList.remove('active-pos');
+          if(currentPosLi) currentPosLi.classList.remove('active-pos');
           li.classList.add('active-pos');
           currentPosLi = li;
 
           // subside highlight
-          if (currentSubH4 !== h4) {
-            if (currentSubH4) currentSubH4.classList.remove('active-sub');
+          if(currentSubH4 !== h4) {
+            if(currentSubH4) currentSubH4.classList.remove('active-sub');
             h4.classList.add('active-sub');
             currentSubH4 = h4;
           }
@@ -138,15 +133,14 @@ function populatePositions(map) {
 
       ul.classList.remove('expanded');
 
+      // On A/B/Mid click
       h4.addEventListener('click', () => {
-        if (currentSubH4 && currentSubH4 !== h4) {
+        if(currentSubH4 && currentSubH4 !== h4) {
           const prevUl = currentSubH4.nextElementSibling;
-          if (prevUl && prevUl.tagName === 'UL') prevUl.classList.remove('expanded');
+          if(prevUl && prevUl.tagName === 'UL') prevUl.classList.remove('expanded');
         }
-
         ul.classList.toggle('expanded');
-
-        if (currentSubH4 && currentSubH4 !== h4) currentSubH4.classList.remove('active-sub');
+        if(currentSubH4 && currentSubH4 !== h4) currentSubH4.classList.remove('active-sub');
         h4.classList.add('active-sub');
         currentSubH4 = h4;
       });
@@ -155,14 +149,17 @@ function populatePositions(map) {
       container.appendChild(ul);
     }
   });
+
+  // Apply filter after filling columns
+  applyFilters();
 }
 
-
+// --- Map click ---
 document.querySelectorAll('.maps li').forEach(mapLi => {
   mapLi.addEventListener('click', () => {
     const mapName = mapLi.textContent;
 
-    if (currentMapLi) currentMapLi.classList.remove('active-map');
+    if(currentMapLi) currentMapLi.classList.remove('active-map');
     mapLi.classList.add('active-map');
     currentMapLi = mapLi;
 
@@ -173,42 +170,28 @@ document.querySelectorAll('.maps li').forEach(mapLi => {
 // --- AUTO: load first page (mirage) ---
 window.addEventListener('DOMContentLoaded', () => {
   const firstMapLi = document.querySelector('.maps li');
-  if (firstMapLi) firstMapLi.click();
+  if(firstMapLi) firstMapLi.click();
+  initFilters(); // Inicjalizacja przycisków filtra
 });
-
-
-
-
-
-
-
-
-
 
 // --- Filtrs ---
-const activeFilters = {
-  smoke: true,
-  molo: true,
-  flash: true,
-  he: true,
-  multi: true
-};
-
 // Make clicking in buttons work
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const type = btn.dataset.type;
+function initFilters() {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.type;
 
-    // przełączanie filtra
-    activeFilters[type] = !activeFilters[type];
+      // switch filter
+      activeFilters[type] = !activeFilters[type];
 
-    // wygląd guzika
-    btn.classList.toggle('inactive', !activeFilters[type]);
+      // appearance
+      btn.classList.toggle('inactive', !activeFilters[type]);
 
-    // zastosowanie filtrów
-    applyFilters();
+      // apply filters
+      applyFilters();
+    });
   });
-});
+}
 
 // Hide/Show filtred grenades
 function applyFilters() {
@@ -216,11 +199,11 @@ function applyFilters() {
     const classes = li.classList;
     let visible = true;
 
-    if (classes.contains('smoke') && !activeFilters.smoke) visible = false;
-    if (classes.contains('molo') && !activeFilters.molo) visible = false;
-    if (classes.contains('flash') && !activeFilters.flash) visible = false;
-    if (classes.contains('he') && !activeFilters.he) visible = false;
-    if (classes.contains('multi') && !activeFilters.multi) visible = false;
+    if(classes.contains('smoke') && !activeFilters.smoke) visible = false;
+    if(classes.contains('molo') && !activeFilters.molo) visible = false;
+    if(classes.contains('flash') && !activeFilters.flash) visible = false;
+    if(classes.contains('he') && !activeFilters.he) visible = false;
+    if(classes.contains('multi') && !activeFilters.multi) visible = false;
 
     li.style.display = visible ? '' : 'none';
   });
