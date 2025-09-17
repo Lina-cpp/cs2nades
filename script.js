@@ -62,6 +62,10 @@ const positionsData = {
 
   
   Overpass: {
+    wip: true,
+      Callouts: [
+    { name: "Overpass", file: "overpass.html", type: "callouts" }
+        ],
     TT: {
       A: [],
       B: [
@@ -70,6 +74,81 @@ const positionsData = {
       Mid: []
     },
     CT: { A: [], B: [], Mid: [] }
+  },
+
+
+
+    Nuke: {
+    wip: true,
+    Callouts: [
+    { name: "Nuke", file: "nuke.html", type: "callouts" }
+        ],
+    TT: {
+      A: [],
+      B: [],
+      Mid: []
+    },
+    CT: { 
+      A: [], 
+      B: [], 
+      Mid: [] 
+    }
+  },
+
+
+
+
+      Ancient: {
+    wip: true,
+    Callouts: [
+    { name: "Ancient", file: "ancient.html", type: "callouts" }
+        ],
+    TT: {
+      A: [],
+      B: [],
+      Mid: []
+    },
+    CT: { 
+      A: [], 
+      B: [], 
+      Mid: [] 
+    }
+  },
+
+
+
+      Dust2: {
+    wip: true,
+    Callouts: [
+    { name: "Dust2", file: "dust2.html", type: "callouts" }
+        ],
+    TT: {
+      A: [],
+      B: [],
+      Mid: []
+    },
+    CT: { 
+      A: [], 
+      B: [], 
+      Mid: [] 
+    }
+  },
+
+      Train: {
+    wip: true,
+    Callouts: [
+    { name: "Train", file: "train.html", type: "callouts" }
+        ],
+    TT: {
+      A: [],
+      B: [],
+      Mid: []
+    },
+    CT: { 
+      A: [], 
+      B: [], 
+      Mid: [] 
+    }
   }
 };
 
@@ -250,3 +329,27 @@ function applyFilters() {
     li.style.display = visible ? '' : 'none';
   });
 }
+
+
+// --- For work in progress map add icon on the righ ---
+
+document.querySelectorAll('.maps li').forEach(mapLi => {
+  const mapName = mapLi.textContent;
+  const mapData = positionsData[mapName];
+
+  if(mapData && mapData.wip) {
+    mapLi.classList.add('wip-map'); // klasa WIP
+    const icon = document.createElement('span');
+    icon.textContent = '👷'; // kask
+    icon.classList.add('wip-icon');
+    mapLi.appendChild(icon); // dodajemy na koniec li
+  }
+
+  mapLi.addEventListener('click', () => {
+    if(currentMapLi) currentMapLi.classList.remove('active-map');
+    mapLi.classList.add('active-map');
+    currentMapLi = mapLi;
+
+    populatePositions(mapName);
+  });
+});

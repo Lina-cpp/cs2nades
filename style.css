@@ -30,7 +30,7 @@ h1 { margin-left: 20px; }
 }
 
 .sides { 
-  width: 250px; 
+  width: 300px; 
   /* TT/CT gradient */
   background: linear-gradient(to bottom, #1a1a1a, #23233a);
 }
@@ -48,6 +48,7 @@ h1 { margin-left: 20px; }
 
 .col.maps li {
   padding: 8px;
+  margin-bottom: 12px;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -231,4 +232,25 @@ li.callouts.active-pos {
   background: linear-gradient(90deg, #ff66aa, #ff33aa); /* intensywniejszy gradient */
   color: #000;
   box-shadow: 0 0 10px rgba(255,102,170,0.7);
+}
+
+
+
+/* Work in progress */
+
+.maps li {
+  display: flex;
+  align-items: center;
+}
+
+
+.maps li.wip-map {
+  background: linear-gradient(90deg, #e6c645, #a48404);
+  color: #fff;
+}
+
+/* icon on the right */
+.wip-icon {
+  margin-left: auto;
+  font-size: 16px;
 }
