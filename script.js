@@ -185,7 +185,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-// --- Filtry ---
+// --- Filtrs ---
 const activeFilters = {
   smoke: true,
   molo: true,
@@ -194,7 +194,7 @@ const activeFilters = {
   multi: true
 };
 
-// Obsługa kliknięć w guziki filtrów
+// Make clicking in buttons work
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const type = btn.dataset.type;
@@ -210,7 +210,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Funkcja ukrywająca/pokazująca li według filtrów
+// Hide/Show filtred grenades
 function applyFilters() {
   document.querySelectorAll('.sides li').forEach(li => {
     const classes = li.classList;
