@@ -25,6 +25,9 @@ const positionsData = {
       Mid: []
     }
   },
+
+
+
   Inferno: {
         Callouts: [
     { name: "Inferno", file: "infernomap.html", type: "callouts" }
@@ -46,8 +49,18 @@ const positionsData = {
         {name: "Short smoke", file: "shortsmoke.html", type:"smoke"}
       ]
     },
-    CT: { B: [] }
+    CT: { 
+      A: [
+        {name: "Oneway | Long", file: "longoneway.html", type:"smoke"}
+      ],
+      B: [
+        {name: "B Smokes | Well", file: "ctsitenades.html", type:"smoke"}
+      ] }
   },
+
+
+
+  
   Overpass: {
     TT: {
       A: [],
