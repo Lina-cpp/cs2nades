@@ -61,7 +61,8 @@ h1 { margin-left: 20px; }
   font-size: 16px;
   cursor: pointer;
   border-radius: 4px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  padding: 6px 10px;
   transition: all 0.2s ease;
 }
 
@@ -73,9 +74,19 @@ h1 { margin-left: 20px; }
 }
 
 /* --- Active highlights --- */
-.col.maps li.active-map { background-color: #4444aa; color: #fff; }
+.col.maps li.active-map { 
+  background-color: #4444aa; color: #fff;
+  background: linear-gradient(90deg, #4444aa, #66ccff);
+
+}
 .col.sides h4.active-sub { color: #66ccff; }
-.col.sides ul li.active-pos { background-color: #66ccff; color: #000; }
+.col.sides ul li.active-pos {
+  background-color: #66ccff; color: #000;
+  background: linear-gradient(90deg, #66ccff, #99ddff);
+  color: #000;  /* kontrast dla tekstu */
+  box-shadow: 0 0 8px rgba(102, 204, 255, 0.5);
+  transition: all 0.3s ease;
+}
 
 /* --- Nades colors --- */
 li.smoke { background-color: #333; color: #fff; }
