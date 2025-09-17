@@ -11,7 +11,7 @@
 
 <div class="container">
 
-  <!-- Kolumna 1: Mapy -->
+  <!-- Maps -->
   <div class="col maps">
     <ul>
       <li>Mirage</li>
@@ -20,8 +20,18 @@
     </ul>
   </div>
 
-  <!-- Kolumna 2: TT/CT pozycje z podziałem A/B/Mid -->
+  <!-- Second Column: TT/CT & A/B/Mid -->
   <div class="col sides">
+    <!-- Filter buttons -->
+    <div class="filters">
+      <button class="filter-btn filter-smoke active" data-type="smoke">Smoke</button>
+      <button class="filter-btn filter-molo active" data-type="molo">Molo</button>
+      <button class="filter-btn filter-flash active" data-type="flash">Flash</button>
+      <button class="filter-btn filter-he active" data-type="he">HE</button>
+      <button class="filter-btn filter-multi active" data-type="multi">Multi</button>
+    </div>
+
+
     <h3>TT</h3>
     <div class="subside" id="TT"></div>
 

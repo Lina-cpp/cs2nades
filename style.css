@@ -186,3 +186,38 @@ li.he {
 .col.sides ul li.multi:hover {
   background-color: #bb66ff; 
 }
+
+
+/* --- Filter Buttons --- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  opacity: 1;
+}
+
+.filter-btn.inactive {
+  opacity: 0.4;
+}
+
+/* Colors for buttons - same as nades */
+.filter-smoke { background-color: #555; }
+.filter-molo { background-color: #ff3333; }
+.filter-flash { background-color: #e6e600; color: #000; }
+.filter-he { background-color: #33cc33; color: #000; }
+.filter-multi { background-color: #9933ff; }

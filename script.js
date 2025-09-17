@@ -175,3 +175,53 @@ window.addEventListener('DOMContentLoaded', () => {
   const firstMapLi = document.querySelector('.maps li');
   if (firstMapLi) firstMapLi.click();
 });
+
+
+
+
+
+
+
+
+
+
+// --- Filtry ---
+const activeFilters = {
+  smoke: true,
+  molo: true,
+  flash: true,
+  he: true,
+  multi: true
+};
+
+// Obsługa kliknięć w guziki filtrów
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const type = btn.dataset.type;
+
+    // przełączanie filtra
+    activeFilters[type] = !activeFilters[type];
+
+    // wygląd guzika
+    btn.classList.toggle('inactive', !activeFilters[type]);
+
+    // zastosowanie filtrów
+    applyFilters();
+  });
+});
+
+// Funkcja ukrywająca/pokazująca li według filtrów
+function applyFilters() {
+  document.querySelectorAll('.sides li').forEach(li => {
+    const classes = li.classList;
+    let visible = true;
+
+    if (classes.contains('smoke') && !activeFilters.smoke) visible = false;
+    if (classes.contains('molo') && !activeFilters.molo) visible = false;
+    if (classes.contains('flash') && !activeFilters.flash) visible = false;
+    if (classes.contains('he') && !activeFilters.he) visible = false;
+    if (classes.contains('multi') && !activeFilters.multi) visible = false;
+
+    li.style.display = visible ? '' : 'none';
+  });
+}
