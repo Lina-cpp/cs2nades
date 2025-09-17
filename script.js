@@ -1,22 +1,25 @@
 // --- Objects with MapNames, positions, etc ---
 const positionsData = {
   Mirage: {
+    Callouts: [
+    { name: "Mirage", file: "miragemap.html", type: "callouts" }
+  ],
     TT: {
       A: [
-        { name: "1 spot - 3 Smokes", file: "pos1.html", type: "smoke" },
-        { name: "Best CT Smoke", file: "bestct.html", type: "smoke"},
-        { name: "Jungle Smoke", file: "miragejungle.html", type: "smoke"}
+        { name: "CT/Jungle/Stairs | Ramp - 1 spot", file: "pos1.html", type: "smoke" },
+        { name: "Best CT Smoke | Ramp", file: "bestct.html", type: "smoke"},
+        { name: "Jungle | Ramp", file: "miragejungle.html", type: "smoke"}
       ],
       B: [
-        { name: "Short/Window/Doors", file: "ShortShopDoors.html", type: "smoke"}
+        { name: "Short/Window/Doors | Snax", file: "ShortShopDoors.html", type: "smoke"}
       ],
       Mid: [
-        { name: "1 spot - 3 Smokes", file: "miragemidsmokes.html", type:"smoke"}
+        { name: "Conn/Window/Short | Spawn - 1 spot", file: "miragemidsmokes.html", type:"smoke"}
       ]
     },
     CT: {
       A: [
-        { name: "Ignite from Stairs to Short", file: "shortmolo.html", type: "molo"}
+        { name: "Short Ignite | Stairs", file: "shortmolo.html", type: "molo"}
       ],
       B: [],
       Mid: []
@@ -25,7 +28,7 @@ const positionsData = {
   Inferno: {
     TT: {
       A: [
-        { name: "Aps OneWay to Site", file: "pos2.html", type:"smoke" },
+        { name: "OneWay Site | Aps", file: "pos2.html", type:"smoke" },
         { name: "Before Biblia", file: "beforebilblia.html", type:"smoke"},
         { name: "Pit Smoke", file: "pitsmoke.html", type:"smoke"}
       ],
@@ -89,38 +92,59 @@ function loadContent(map, sub, filename) {
     });
 }
 
-// --- Populate TT/CT → A/B/Mid → Positions ---
+
+// --- Fill columns Callouts / TT / CT → A/B/Mid → Positions ---
 function populatePositions(map) {
-  ['TT','CT'].forEach(side => {
+  const sidesOrder = ['Callouts','TT','CT']; // Order including Callouts
+
+  sidesOrder.forEach(side => {
     const container = document.getElementById(side);
     container.innerHTML = '';
 
     const subSides = positionsData[map][side];
+    if(!subSides) return; // jeśli brak Callouts, przejdź dalej
+
+    // Jeśli Callouts nie ma sub-sekcji (TT/CT mają A/B/Mid)
+    if(side === 'Callouts') {
+      subSides.forEach(posObj => {
+        const li = document.createElement('li');
+        li.textContent = posObj.name;
+
+        if(posObj.type) li.classList.add(posObj.type);
+
+        li.addEventListener('click', () => {
+          loadContent(map, '', posObj.file); // sub pusty dla Callouts
+
+          if(currentPosLi) currentPosLi.classList.remove('active-pos');
+          li.classList.add('active-pos');
+          currentPosLi = li;
+        });
+
+        container.appendChild(li);
+      });
+      return;
+    }
+
+    // --- Existing TT/CT logic ---
     for (const sub in subSides) {
-      // A/B/Mid Header
       const h4 = document.createElement('h4');
       h4.textContent = sub;
       h4.style.cursor = "pointer";
 
-      // Grenade positions
       const ul = document.createElement('ul');
       subSides[sub].forEach(posObj => {
         const li = document.createElement('li');
         li.textContent = posObj.name;
 
-        // Add type class for CSS/filter
-        if (posObj.type) li.classList.add(posObj.type);
+        if(posObj.type) li.classList.add(posObj.type);
 
-        // Click to load content
         li.addEventListener('click', () => {
           loadContent(map, sub, posObj.file);
 
-          // Highlight position
           if(currentPosLi) currentPosLi.classList.remove('active-pos');
           li.classList.add('active-pos');
           currentPosLi = li;
 
-          // Highlight sub header
           if(currentSubH4 !== h4) {
             if(currentSubH4) currentSubH4.classList.remove('active-sub');
             h4.classList.add('active-sub');
@@ -133,7 +157,6 @@ function populatePositions(map) {
 
       ul.classList.remove('expanded');
 
-      // Expand/collapse A/B/Mid
       h4.addEventListener('click', () => {
         if(currentSubH4 && currentSubH4 !== h4) {
           const prevUl = currentSubH4.nextElementSibling;
@@ -150,9 +173,9 @@ function populatePositions(map) {
     }
   });
 
-  // Apply filters after populating
-  applyFilters();
+  applyFilters(); // Apply filters after filling columns
 }
+
 
 // --- Map click ---
 document.querySelectorAll('.maps li').forEach(mapLi => {
