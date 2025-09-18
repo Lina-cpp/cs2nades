@@ -67,7 +67,12 @@ const positionsData = {
     { name: "Overpass", file: "overpass.html", type: "callouts" }
         ],
     TT: {
-      B: [
+      A: 
+      [
+        {name: "Kible | Spawn", file: "kiblespawn.html", type: "smoke"}
+      ],
+      B: 
+      [
         { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
       ],
     },
