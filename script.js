@@ -263,3 +263,24 @@ window.addEventListener('DOMContentLoaded',()=>{
   else { const firstMapLi=document.querySelector('.maps li'); if(firstMapLi) firstMapLi.click(); }
   initFilters();
 });
+
+function updateWipIcons() {
+  document.querySelectorAll('.maps li').forEach(mapLi => {
+    const mapName = mapLi.textContent.trim();
+    const mapData = positionsData[mapName];
+
+    if(mapData && mapData.wip) {
+      mapLi.classList.add('wip-map');
+
+      if(!mapLi.querySelector('.wip-icon')) {
+        const icon = document.createElement('span');
+        icon.textContent = '👷';
+        icon.classList.add('wip-icon');
+        mapLi.appendChild(icon);
+      }
+    }
+  });
+}
+
+// wywołaj przy starcie i po każdej zmianie map
+updateWipIcons();

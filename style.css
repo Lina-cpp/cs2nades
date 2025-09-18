@@ -55,23 +55,25 @@ h1 { margin-left: 20px; }
 .maps ul { list-style: none; padding: 0; margin: 0; }
 .maps li {
   font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; 
   padding: 8px;
   margin-bottom: 12px;
   cursor: pointer;
   border-radius: 4px;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-
-  justify-content: center;
-  text-align: center;  
+  transition: all 0.2s ease; 
 }
 .maps li:hover { background: #2c2c3c; }
 .maps li.active-map { background: linear-gradient(90deg, #4444aa, #6677ff); color: #fff; }
 
 /* --- WIP icon --- */
-.maps li.wip-map { background: linear-gradient(90deg, #e6c645, #a48404); color: #fff; }
-.wip-icon { margin-left: auto; font-size: 16px; }
+.maps li.wip-map { background: linear-gradient(90deg, #bf9903, #3a2f01); color: #fff; }
+.wip-icon {
+  font-size: 30px;
+  display: inline-block;
+}
 
 /* --- TT/CT headers --- */
 .sides h3 {
@@ -160,30 +162,83 @@ li.callouts.active-pos { background: linear-gradient(90deg, #ff66aa, #ff33aa); c
 /* ---  --- */
 /* ---  --- */
 
-.home-container h2 {
-  font-size: 36px;
-  margin: 20px 0;
+/* --- Home Container --- */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 120px; /* trochę niżej całość */
+  height: 100%;
+  text-align: center;
+  color: #66ccff;
+}
+
+/* --- Welcome text --- */
+.home-container h2,
+.home-container .welcome-text,
+.home-links .links-title {
   opacity: 0;
   transform: translateY(-20px);
   animation: fadeIn 1s forwards;
 }
 
-
-/* home.css */
-.home-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;  
-  align-items: center;           
-  padding-top: 60px;             
-  height: 100%;
-  text-align: center;
-  color: #66ccff;
-
-  transform: translateY(-20px);
-  animation: fadeIn 1s forwards;
+.home-container h2 {
+  font-size: 70px;
+  margin: 10px 0;
+  animation-delay: 0.2s;
 }
 
+.home-container .welcome-text {
+  font-size: 36px; 
+  margin: 10px 0 40px 0;
+  animation-delay: 0.6s;
+}
+
+/* --- Text above buttons --- */
+.home-links .links-title {
+  font-size: 25px; 
+  margin-bottom: 15px;
+  animation-delay: 0.9s;
+}
+
+/* --- Buttons container --- */
+.home-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 200px;
+}
+
+/* --- Buttons row --- */
+.links-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+/* --- Buttons --- */
+.links-buttons a {
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: #66ccff;
+  color: #121212;
+  text-decoration: none;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+.links-buttons a:nth-child(1) { animation-delay: 1.0s; }
+.links-buttons a:nth-child(2) { animation-delay: 1.2s; }
+
+.links-buttons a:hover {
+  background-color: #44aaff;
+  transform: scale(1.05);
+}
+
+/* --- Animations --- */
 @keyframes fadeIn {
   to {
     opacity: 1;
@@ -191,20 +246,9 @@ li.callouts.active-pos { background: linear-gradient(90deg, #ff66aa, #ff33aa); c
   }
 }
 
-/* home.css */
-.home-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;  
-  align-items: center;           
-  padding-top: 60px;             
-  height: 100%;
-  text-align: center;
-  color: #66ccff;
-
-}
-
-.home-container h2 {
-  font-size: 36px;
-  margin: 20px 0;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
