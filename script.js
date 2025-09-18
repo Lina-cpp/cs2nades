@@ -66,8 +66,9 @@ const positionsData = {
         {name: "Kible | Spawn", file: "kiblespawn.html", type: "smoke"},
         {name: "Kible | Playground", file: "playgroundkible.html", type: "smoke"},
         {name: "Bank&Śmietnik | Fenix", file: "banksmietnik.html", type: "smoke"},
-        {name: "Śmietnik Smoke + Optimus Ignite | Kible", file: "multikible.html", type: "multi"},
+        {name: "Śmietnik Smoke + Optimus Ignite | Kible", file: "multikible.html", type:["multi", "smoke", "molo"]},
         {name: "Bank | Long", file: "banklongsmoke.html", type: "smoke"},
+        {name: "Śmietnik + Molo Optimus | Long", file: "longmultinades.html", type:["multi", "smoke", "molo"]},
       ],
       B: [
         { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
