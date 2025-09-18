@@ -21,10 +21,8 @@ const positionsData = {
       A: [
         { name: "Short Ignite | Stairs", file: "shortmolo.html", type: "molo"}
       ],
-      B: [],
-      Mid: []
-    }
   },
+},
 
   Inferno: {
     Callouts: [
@@ -57,7 +55,6 @@ const positionsData = {
   },
 
   Overpass: {
-    wip: true,
     Callouts: [
       { name: "Overpass", file: "overpass.html", type: "callouts" }
     ],
@@ -78,6 +75,14 @@ const positionsData = {
         { name: "Heaven/Water/ABC(close) | Syf", file: "syfmulti.html", type:"smoke"}
       ],
     },
+    CT: 
+    {
+      B:
+      [
+        {name: "Monster Smoke | Spawn", file: "monstersmokefromspawn.html", type:"smoke"},
+        {name: "A site molo | Kible", file: "molositeb.html", type:"molo"}
+      ]
+    }
   },
 
   Nuke: {
@@ -107,6 +112,11 @@ const positionsData = {
     CT: { A: [], B: [], Mid: [] }
   },
 
+
+
+
+
+
   Dust2: {
     wip: true,
     Callouts: [
@@ -115,6 +125,12 @@ const positionsData = {
     TT: { A: [], B: [], Mid: [] },
     CT: { A: [], B: [], Mid: [] }
   },
+
+
+
+
+
+
 
   Train: {
     wip: true,
@@ -141,6 +157,7 @@ const activeFilters = {
   molo: true,
   flash: true,
   he: true,
+  callouts: true
 };
 
 // --- Load HTML into details ---
