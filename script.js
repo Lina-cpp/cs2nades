@@ -71,7 +71,11 @@ const positionsData = {
         {name: "Śmietnik + Molo Optimus | Long", file: "longmultinades.html", type:["multi", "smoke", "molo"]},
       ],
       B: [
-        { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
+        { name: "Heaven | Spawn", file: "heaven.html", type:"smoke"},
+        { name: "Heaven | Monster", file: "monstertoheaven.html", type:"smoke"},
+        { name: "Short | Monster", file: "monstertoshort.html", type:"smoke"},
+        { name: "ABC | Syf", file: "syftoabc.html", type:"smoke"},
+        { name: "Heaven/Water/ABC(close) | Syf", file: "syfmulti.html", type:"smoke"}
       ],
     },
   },
