@@ -56,6 +56,10 @@ h1 { margin-left: 20px; }
   font-size: 30px;
   background: linear-gradient(to bottom, #121212, #23233a);
   transition: all 0.4s ease;
+
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 /* --- Map list --- */
