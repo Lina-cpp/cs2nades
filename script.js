@@ -152,11 +152,17 @@ let currentSubH4 = null;
 let currentPosLi = null;
 const activeFilters = { smoke:true, molo:true, flash:true, he:true, callouts:true };
 
-function loadContent(map, sub, filename) {
-  fetch(`maps/${map.toLowerCase()}/${sub}/${filename}`)
+function loadContent(file){
+  fetch(file)
     .then(r=>r.ok?r.text():Promise.reject('File not found'))
     .then(html=>details.innerHTML=html)
     .catch(err=>details.innerHTML=`<p>Error loading: ${err}</p>`);
+}
+
+function hasPositions(mapName){
+  const map=positionsData[mapName];
+  if(!map) return false;
+  return ['TT','CT'].some(side=>map[side] && Object.keys(map[side]).some(k=>map[side][k].length>0));
 }
 
 function createPositionElement(map, sub, posObj, h4){
@@ -166,7 +172,7 @@ function createPositionElement(map, sub, posObj, h4){
   li.dataset.types = Array.isArray(posObj.type)?posObj.type.join(','):posObj.type;
 
   li.addEventListener('click',()=>{
-    loadContent(map,sub,posObj.file);
+    loadContent(`maps/${map.toLowerCase()}/${sub}/${posObj.file}`);
     if(currentPosLi) currentPosLi.classList.remove('active-pos');
     li.classList.add('active-pos'); currentPosLi=li;
     if(h4 && currentSubH4!==h4){ if(currentSubH4) currentSubH4.classList.remove('active-sub'); h4.classList.add('active-sub'); currentSubH4=h4; }
@@ -174,23 +180,23 @@ function createPositionElement(map, sub, posObj, h4){
   return li;
 }
 
-function hasPositions(mapName){
-  const map=positionsData[mapName];
-  if(!map) return false;
-  return ['TT','CT'].some(side=>map[side] && Object.keys(map[side]).some(k=>map[side][k].length>0));
-}
+function populatePositions(mapName){
+  if(mapName==='Home'){
+    sides.classList.remove('show'); // ukryj .sides
+    loadContent('maps/home.html'); // ładuj home.html
+    return;
+  }
 
-function populatePositions(map){
+  if(hasPositions(mapName)) sides.classList.add('show'); else sides.classList.remove('show');
+
   const sidesOrder=['Callouts','TT','CT'];
-  if(hasPositions(map)) sides.classList.add('show'); else sides.classList.remove('show');
-
   sidesOrder.forEach(side=>{
     const container=document.getElementById(side);
     container.innerHTML='';
-    const subSides=positionsData[map][side]; if(!subSides) return;
+    const subSides=positionsData[mapName][side]; if(!subSides) return;
 
     if(side==='Callouts'){
-      subSides.forEach(posObj=>container.appendChild(createPositionElement(map,'',posObj,null)));
+      subSides.forEach(posObj=>container.appendChild(createPositionElement(mapName,'',posObj,null)));
       return;
     }
 
@@ -200,7 +206,7 @@ function populatePositions(map){
       h4.style.cursor="pointer";
 
       const ul=document.createElement('ul');
-      subSides[sub].forEach(posObj=>ul.appendChild(createPositionElement(map,sub,posObj,h4)));
+      subSides[sub].forEach(posObj=>ul.appendChild(createPositionElement(mapName,sub,posObj,h4)));
       ul.classList.remove('expanded');
 
       h4.addEventListener('click',()=>{
@@ -220,21 +226,12 @@ function populatePositions(map){
   applyFilters();
 }
 
+// --- Map click ---
 mapItems.forEach(mapLi=>{
-  const mapName=mapLi.textContent;
-  const mapData=positionsData[mapName];
-
-  if(mapData && mapData.wip){
-    mapLi.classList.add('wip-map');
-    const icon=document.createElement('span');
-    icon.textContent='👷';
-    icon.classList.add('wip-icon');
-    mapLi.appendChild(icon);
-  }
-
   mapLi.addEventListener('click',()=>{
     if(currentMapLi) currentMapLi.classList.remove('active-map');
     mapLi.classList.add('active-map'); currentMapLi=mapLi;
+    const mapName = mapLi.textContent;
     populatePositions(mapName);
   });
 });
@@ -259,9 +256,10 @@ function applyFilters(){
   });
 }
 
+// --- AUTO: load Home page ---
 window.addEventListener('DOMContentLoaded',()=>{
-  const firstMapLi=document.querySelector('.maps li');
-  if(firstMapLi) firstMapLi.click();
+  const homeLi = Array.from(mapItems).find(li=>li.textContent==='Home');
+  if(homeLi) homeLi.click();
+  else { const firstMapLi=document.querySelector('.maps li'); if(firstMapLi) firstMapLi.click(); }
   initFilters();
 });
-
