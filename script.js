@@ -142,188 +142,126 @@ const positionsData = {
   }
 };
 
-// --- DOM Elements ---
-const details = document.querySelector('.details');
-const filterButtonsContainer = document.querySelector('.filters');
 
-// --- Track active elements ---
+const details = document.querySelector('.details');
+const sides = document.querySelector('.sides');
+const mapItems = document.querySelectorAll('.maps li');
+
 let currentMapLi = null;
 let currentSubH4 = null;
 let currentPosLi = null;
+const activeFilters = { smoke:true, molo:true, flash:true, he:true, callouts:true };
 
-// --- Global filters state ---
-const activeFilters = {
-  smoke: true,
-  molo: true,
-  flash: true,
-  he: true,
-  callouts: true
-};
-
-// --- Load HTML into details ---
 function loadContent(map, sub, filename) {
-  const url = `maps/${map.toLowerCase()}/${sub}/${filename}`;
-
-  fetch(url)
-    .then(response => {
-      if (!response.ok) throw new Error('File not found');
-      return response.text();
-    })
-    .then(html => {
-      details.innerHTML = html;
-    })
-    .catch(err => {
-      details.innerHTML = `<p>Error loading: ${err}</p>`;
-    });
+  fetch(`maps/${map.toLowerCase()}/${sub}/${filename}`)
+    .then(r=>r.ok?r.text():Promise.reject('File not found'))
+    .then(html=>details.innerHTML=html)
+    .catch(err=>details.innerHTML=`<p>Error loading: ${err}</p>`);
 }
 
-// --- Create position element (support multi-types) ---
-function createPositionElement(map, sub, posObj, h4) {
-  const li = document.createElement('li');
-  li.textContent = posObj.name;
+function createPositionElement(map, sub, posObj, h4){
+  const li=document.createElement('li');
+  li.textContent=posObj.name;
+  li.classList.add(Array.isArray(posObj.type)?posObj.type[0]:posObj.type);
+  li.dataset.types = Array.isArray(posObj.type)?posObj.type.join(','):posObj.type;
 
-  // handle multiple types
-  if (Array.isArray(posObj.type)) {
-    li.classList.add(posObj.type[0]); // pierwszy typ -> kolor
-    li.dataset.types = posObj.type.join(",");
-  } else {
-    li.classList.add(posObj.type);
-    li.dataset.types = posObj.type;
-  }
-
-  li.addEventListener('click', () => {
-    loadContent(map, sub, posObj.file);
-
+  li.addEventListener('click',()=>{
+    loadContent(map,sub,posObj.file);
     if(currentPosLi) currentPosLi.classList.remove('active-pos');
-    li.classList.add('active-pos');
-    currentPosLi = li;
-
-    if(h4 && currentSubH4 !== h4) {
-      if(currentSubH4) currentSubH4.classList.remove('active-sub');
-      h4.classList.add('active-sub');
-      currentSubH4 = h4;
-    }
+    li.classList.add('active-pos'); currentPosLi=li;
+    if(h4 && currentSubH4!==h4){ if(currentSubH4) currentSubH4.classList.remove('active-sub'); h4.classList.add('active-sub'); currentSubH4=h4; }
   });
-
   return li;
 }
 
-// --- Fill columns Callouts / TT / CT ---
-function populatePositions(map) {
-  const sidesOrder = ['Callouts','TT','CT'];
+function hasPositions(mapName){
+  const map=positionsData[mapName];
+  if(!map) return false;
+  return ['TT','CT'].some(side=>map[side] && Object.keys(map[side]).some(k=>map[side][k].length>0));
+}
 
-  sidesOrder.forEach(side => {
-    const container = document.getElementById(side);
-    container.innerHTML = '';
+function populatePositions(map){
+  const sidesOrder=['Callouts','TT','CT'];
+  if(hasPositions(map)) sides.classList.add('show'); else sides.classList.remove('show');
 
-    const subSides = positionsData[map][side];
-    if(!subSides) return;
+  sidesOrder.forEach(side=>{
+    const container=document.getElementById(side);
+    container.innerHTML='';
+    const subSides=positionsData[map][side]; if(!subSides) return;
 
-    if(side === 'Callouts') {
-      subSides.forEach(posObj => {
-        const li = createPositionElement(map, '', posObj, null);
-        container.appendChild(li);
-      });
+    if(side==='Callouts'){
+      subSides.forEach(posObj=>container.appendChild(createPositionElement(map,'',posObj,null)));
       return;
     }
 
-    for (const sub in subSides) {
-      const h4 = document.createElement('h4');
-      h4.textContent = sub;
-      h4.style.cursor = "pointer";
+    for(const sub in subSides){
+      const h4=document.createElement('h4');
+      h4.textContent=sub;
+      h4.style.cursor="pointer";
 
-      const ul = document.createElement('ul');
-      subSides[sub].forEach(posObj => {
-        const li = createPositionElement(map, sub, posObj, h4);
-        ul.appendChild(li);
-      });
-
+      const ul=document.createElement('ul');
+      subSides[sub].forEach(posObj=>ul.appendChild(createPositionElement(map,sub,posObj,h4)));
       ul.classList.remove('expanded');
 
-      h4.addEventListener('click', () => {
-        if(currentSubH4 && currentSubH4 !== h4) {
-          const prevUl = currentSubH4.nextElementSibling;
-          if(prevUl && prevUl.tagName === 'UL') prevUl.classList.remove('expanded');
+      h4.addEventListener('click',()=>{
+        if(currentSubH4 && currentSubH4!==h4){
+          const prevUl=currentSubH4.nextElementSibling;
+          if(prevUl && prevUl.tagName==='UL') prevUl.classList.remove('expanded');
         }
         ul.classList.toggle('expanded');
-        if(currentSubH4 && currentSubH4 !== h4) currentSubH4.classList.remove('active-sub');
-        h4.classList.add('active-sub');
-        currentSubH4 = h4;
+        if(currentSubH4 && currentSubH4!==h4) currentSubH4.classList.remove('active-sub');
+        h4.classList.add('active-sub'); currentSubH4=h4;
       });
 
       container.appendChild(h4);
       container.appendChild(ul);
     }
   });
-
   applyFilters();
 }
 
-// --- Map click ---
-document.querySelectorAll('.maps li').forEach(mapLi => {
-  mapLi.addEventListener('click', () => {
-    const mapName = mapLi.textContent;
+mapItems.forEach(mapLi=>{
+  const mapName=mapLi.textContent;
+  const mapData=positionsData[mapName];
 
+  if(mapData && mapData.wip){
+    mapLi.classList.add('wip-map');
+    const icon=document.createElement('span');
+    icon.textContent='👷';
+    icon.classList.add('wip-icon');
+    mapLi.appendChild(icon);
+  }
+
+  mapLi.addEventListener('click',()=>{
     if(currentMapLi) currentMapLi.classList.remove('active-map');
-    mapLi.classList.add('active-map');
-    currentMapLi = mapLi;
-
+    mapLi.classList.add('active-map'); currentMapLi=mapLi;
     populatePositions(mapName);
   });
 });
 
-// --- AUTO: load first map ---
-window.addEventListener('DOMContentLoaded', () => {
-  const firstMapLi = document.querySelector('.maps li');
-  if(firstMapLi) firstMapLi.click();
-  initFilters();
-});
-
-// --- Filters ---
-function initFilters() {
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    const type = btn.dataset.type;
-
-    // --- jeżeli przycisk byłby "multi", to pomiń go (nie robimy filtra dla multi)
-    if (!(type in activeFilters)) return;
-
+function initFilters(){
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    const type=btn.dataset.type;
+    if(!(type in activeFilters)) return;
     if(!activeFilters[type]) btn.classList.add('inactive');
-
-    btn.addEventListener('click', () => {
-      activeFilters[type] = !activeFilters[type];
-      btn.classList.toggle('inactive', !activeFilters[type]);
+    btn.addEventListener('click',()=>{
+      activeFilters[type]=!activeFilters[type];
+      btn.classList.toggle('inactive',!activeFilters[type]);
       applyFilters();
     });
   });
 }
 
-function applyFilters() {
-  document.querySelectorAll('.sides li').forEach(li => {
-    const types = li.dataset.types ? li.dataset.types.split(",") : [];
-    const matches = types.some(type => activeFilters[type]);
-
-    li.style.display = matches ? '' : 'none';
+function applyFilters(){
+  document.querySelectorAll('.sides li').forEach(li=>{
+    const types = li.dataset.types?li.dataset.types.split(','):[];
+    li.style.display=types.some(type=>activeFilters[type])?'':'none';
   });
 }
 
-// --- For WIP maps add icon ---
-document.querySelectorAll('.maps li').forEach(mapLi => {
-  const mapName = mapLi.textContent;
-  const mapData = positionsData[mapName];
-
-  if(mapData && mapData.wip) {
-    mapLi.classList.add('wip-map');
-    const icon = document.createElement('span');
-    icon.textContent = '👷';
-    icon.classList.add('wip-icon');
-    mapLi.appendChild(icon);
-  }
-
-  mapLi.addEventListener('click', () => {
-    if(currentMapLi) currentMapLi.classList.remove('active-map');
-    mapLi.classList.add('active-map');
-    currentMapLi = mapLi;
-
-    populatePositions(mapName);
-  });
+window.addEventListener('DOMContentLoaded',()=>{
+  const firstMapLi=document.querySelector('.maps li');
+  if(firstMapLi) firstMapLi.click();
+  initFilters();
 });
+

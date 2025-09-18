@@ -1,6 +1,6 @@
 /* --- Body & Headers --- */
 body {
-  background-color: #121212; /* ciemny grafit, spójny dla całej strony */
+  background-color: #121212;
   color: #e0e0e0;
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -11,68 +11,72 @@ body {
 h1, h2, h3, h4, h5, h6 { margin: 0; }
 h1 { margin-left: 20px; }
 
+/* --- Container & Columns --- */
 .container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
-/* --- Columns --- */
-.col {
+/* Maps column */
+.maps {
+  width: 180px;
+  background: linear-gradient(to bottom, #1b1b1b, #23233a);
+  flex-shrink: 0;
   padding: 20px;
   overflow-y: auto;
-  border-right: 1px solid #2c2c2c;
 }
 
-.maps { 
-  width: 180px; 
-  /* map gradient */
-  background: linear-gradient(to bottom, #1b1b1b, #23233a);
-}
-
-.sides { 
-  width: 310px; 
-  /* TT/CT gradient */
+/* Sides column (TT/CT + callouts) */
+.sides {
+  width: 0;
+  overflow: hidden;
   background: linear-gradient(to bottom, #1a1a1a, #23233a);
+  transition: width 0.4s ease;
+  flex-shrink: 0;
+  padding: 20px 0; /* padding tylko po bokach gdy show */
 }
 
-.details { 
-  flex: 1; 
-  padding: 20px; 
-  font-size: 30px; 
-  /* Details gradient */
+.sides.show {
+  width: 310px;
+  padding: 20px;
+}
+
+/* Details column */
+.details {
+  flex: 1;
+  padding: 20px;
+  font-size: 30px;
   background: linear-gradient(to bottom, #121212, #23233a);
+  transition: all 0.4s ease;
 }
 
 /* --- Map list --- */
-.col.maps ul { list-style: none; padding: 0; margin: 0; }
-
-.col.maps li {
+.maps ul { list-style: none; padding: 0; margin: 0; }
+.maps li {
   padding: 8px;
   margin-bottom: 12px;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
 }
+.maps li:hover { background: #2c2c3c; }
+.maps li.active-map { background: linear-gradient(90deg, #4444aa, #6677ff); color: #fff; }
 
-.col.maps li:hover { 
-  background: #2c2c3c; 
-}
+/* --- WIP icon --- */
+.maps li.wip-map { background: linear-gradient(90deg, #e6c645, #a48404); color: #fff; }
+.wip-icon { margin-left: auto; font-size: 16px; }
 
 /* --- TT/CT headers --- */
-.col.sides h3 {
+.sides h3 {
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
   color: #fff;
 }
-
-.col.sides h3:nth-of-type(3) {
-  margin-top: 40px;
-}
-
-
-/* --- A/B/Mid headers --- */
-.col.sides h4 {
+.sides h4 {
   font-size: 16px;
   margin-left: 20px;
   margin-top: 10px;
@@ -81,15 +85,12 @@ h1 { margin-left: 20px; }
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
-.col.sides h4:hover {
-  color: #88ddff;
-}
+.sides h4:hover { color: #88ddff; }
+.sides h4.active-sub { color: #66ccff; }
 
 /* --- Positions list --- */
-.col.sides ul { list-style: none; padding: 0; margin: 0; }
-
-.col.sides ul li {
+.sides ul { list-style: none; padding: 0; margin: 0; }
+.sides ul li {
   padding-left: 40px;
   font-size: 16px;
   cursor: pointer;
@@ -98,164 +99,47 @@ h1 { margin-left: 20px; }
   padding: 6px 10px;
   transition: all 0.2s ease;
 }
-
-/* --- Hover positions --- */
-.col.sides ul li:hover { 
-  opacity: 0.85; 
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-  transform: scale(1.03);
-}
-
-/* --- Active highlights --- */
-.col.maps li.active-map { 
-  background: linear-gradient(90deg, #4444aa, #6677ff);
-  color: #fff;
-}
-
-
-
-
-.col.sides h4.active-sub { color: #66ccff; }
-
-.col.sides ul li.active-pos {
+.sides ul li:hover { opacity: 0.85; box-shadow: 0 0 8px rgba(255,255,255,0.2); transform: scale(1.03); }
+.sides ul li.active-pos {
   background: linear-gradient(90deg, #66ccff, #99ddff);
   color: #000;
-  box-shadow: 0 0 10px rgba(102, 204, 255, 0.6);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(102,204,255,0.6);
 }
 
+/* --- Nades colors --- */
+li.smoke { background: linear-gradient(to right, #3a3a3a, #2a2a2a); color: #fff; }
+li.molo { background: linear-gradient(to right, #b22a2a, #8a1f1f); color: #000; }
+li.flash { background: linear-gradient(to right, #cccc33, #999900); color: #000; }
+li.he { background: linear-gradient(to right, #228822, #176617); color: #000; }
+li.multi { background: linear-gradient(to right, #9933bf, #6b1fbf); color: #000; }
 
-/* Active highlights with subtle glow */
-li.active-pos {
-  box-shadow: 0 0 10px rgba(102,204,255,0.6), 0 2px 5px rgba(0,0,0,0.4);
-}
-
-li.callouts.active-pos {
-  box-shadow: 0 0 12px rgba(0,179,179,0.7), 0 2px 6px rgba(0,0,0,0.3);
-}
-
-
-
-
-/* --- Nades colors with subtle left → right gradient --- */
-li.smoke { 
-  background: linear-gradient(to right, #3a3a3a, #2a2a2a); 
-  color: #fff; 
-}
-
-li.molo { 
-  background: linear-gradient(to right, #b22a2a, #8a1f1f); 
-  color: #000; 
-}
-
-li.flash { 
-  background: linear-gradient(to right, #cccc33, #999900); 
-  color: #000; 
-}
-
-li.he { 
-  background: linear-gradient(to right, #228822, #176617); 
-  color: #000; 
-}
-
-li.multi { 
-  background: linear-gradient(to right, #9933bf, #6b1fbf); 
-  color: #000; 
-}
-
-/* --- Hover --- */
+/* Hover nades */
 li.smoke:hover { background: linear-gradient(to right, #4a4a4a, #3a3a3a); }
 li.molo:hover { background: linear-gradient(to right, #c33a3a, #9b2626); }
 li.flash:hover { background: linear-gradient(to right, #e6e64d, #bfbf33); }
 li.he:hover { background: linear-gradient(to right, #2aad2a, #1f881f); }
 li.multi:hover { background: linear-gradient(to right, #b366ff, #9933ff); }
 
-
-
-/* --- Filter Buttons --- */
-
-/* Filters title */
-.filters-title {
-  margin: 0 0 5px 0;
-  color: #66ccff;
-  font-size: 18px;
-  font-weight: bold;
+/* --- Callouts --- */
+li.callouts { 
+  list-style: none; 
+  background: linear-gradient(90deg, #ff99cc, #ff66aa); 
+  color: #000; 
+  padding: 6px 10px; 
+  border-radius: 4px; 
+  margin-bottom: 6px; 
+  cursor: pointer; 
+  transition: all 0.2s ease; 
 }
+li.callouts:hover { opacity: 0.9; box-shadow: 0 0 8px rgba(255,153,204,0.5); transform: scale(1.02); }
+li.callouts.active-pos { background: linear-gradient(90deg, #ff66aa, #ff33aa); color: #000; box-shadow: 0 0 10px rgba(255,102,170,0.7); }
 
-/* Filters container */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 15px;
-}
-
-/* Filters buttons */
-.filter-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #fff;
-  transition: all 0.2s ease;
-}
-
-.filter-btn.inactive { 
-  opacity: 0.4; 
-}
-
-/* Colors same as grenades */
+/* --- Filters --- */
+.filters { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px; }
+.filter-btn { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; color: #fff; transition: all 0.2s ease; }
+.filter-btn.inactive { opacity: 0.4; }
 .filter-smoke { background-color: #555; }
 .filter-molo { background-color: #ff3333; }
 .filter-flash { background-color: #e6e600; color: #000; }
 .filter-he { background-color: #33cc33; color: #000; }
 .filter-multi { background-color: #9933ff; }
-
-
-/* --- Callouts style --- */
-li.callouts {
-  list-style: none; /* usuwa kropki */
-  background: linear-gradient(90deg, #ff99cc, #ff66aa); /* gradient */
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-/* Hover effect */
-li.callouts:hover {
-  opacity: 0.9;
-  box-shadow: 0 0 8px rgba(255,153,204,0.5);
-  transform: scale(1.02);
-}
-
-/* Active highlight for callouts */
-li.callouts.active-pos {
-  background: linear-gradient(90deg, #ff66aa, #ff33aa); /* intensywniejszy gradient */
-  color: #000;
-  box-shadow: 0 0 10px rgba(255,102,170,0.7);
-}
-
-
-
-/* Work in progress */
-
-.maps li {
-  display: flex;
-  align-items: center;
-}
-
-
-.maps li.wip-map {
-  background: linear-gradient(90deg, #e6c645, #a48404);
-  color: #fff;
-}
-
-/* icon on the right */
-.wip-icon {
-  margin-left: auto;
-  font-size: 16px;
-}
