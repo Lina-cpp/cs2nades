@@ -2,8 +2,8 @@
 const positionsData = {
   Mirage: {
     Callouts: [
-    { name: "Mirage", file: "miragemap.html", type: "callouts" }
-  ],
+      { name: "Mirage", file: "miragemap.html", type: "callouts" }
+    ],
     TT: {
       A: [
         { name: "CT/Jungle/Stairs | Ramp - 1 spot", file: "pos1.html", type: "smoke" },
@@ -26,12 +26,10 @@ const positionsData = {
     }
   },
 
-
-
   Inferno: {
-        Callouts: [
-    { name: "Inferno", file: "infernomap.html", type: "callouts" }
-        ],
+    Callouts: [
+      { name: "Inferno", file: "infernomap.html", type: "callouts" }
+    ],
     TT: {
       A: [
         { name: "OneWay Site | Aps", file: "pos2.html", type:"smoke" },
@@ -42,7 +40,7 @@ const positionsData = {
         { name: "Spawn to CT", file: "ctsmoke4.html", type:"smoke"},
         { name: "CT+Boost", file: "ctsmokeandboost.html", type:"smoke"},
         { name: "Coffin", file: "bcoffin.html", type:"smoke"},
-        { name: "Car multinades", file:"bcartositenades.html", type:"multi"}
+        { name: "Car multinades", file:"bcartositenades.html", type:["multi","molo","he","flash"] }
       ],
       Mid: [
         {name: "Mid smoke", file: "midsmoke.html", type:"smoke"},
@@ -58,103 +56,68 @@ const positionsData = {
       ] }
   },
 
-
-
-  
   Overpass: {
-      wip: true,
-      Callouts: [
-    { name: "Overpass", file: "overpass.html", type: "callouts" }
-        ],
+    wip: true,
+    Callouts: [
+      { name: "Overpass", file: "overpass.html", type: "callouts" }
+    ],
     TT: {
-      A: 
-      [
-        {name: "Kible | Spawn", file: "kiblespawn.html", type: "smoke"}
+      A: [
+        {name: "Kible | Spawn", file: "kiblespawn.html", type: "smoke"},
+        {name: "Kible | Playground", file: "playgroundkible.html", type: "smoke"},
+        {name: "Bank&Śmietnik | Fenix", file: "banksmietnik.html", type: "smoke"},
+        {name: "Śmietnik Smoke + Optimus Ignite | Kible", file: "multikible.html", type: "multi"},
+        {name: "Bank | Long", file: "banklongsmoke.html", type: "smoke"},
       ],
-      B: 
-      [
+      B: [
         { name: "Heaven Smoke [Spawn]", file: "heaven.html", type:"smoke"}
       ],
     },
   },
 
-
-
-    Nuke: {
+  Nuke: {
     Callouts: [
-    { name: "Nuke", file: "nuke.html", type: "callouts" }
-        ],
+      { name: "Nuke", file: "nuke.html", type: "callouts" }
+    ],
     TT: {
-      A: 
-      [
+      A: [
         {name:"Heaven | Spawn", file:"nukeheaven.html", type:"smoke"},
         {name: "Vent Rush | Spawn", file: "ventrush.html", type:"smoke"}
       ],
-      Outside:
-      [
+      Outside: [
         {name: "Outside 3x | Spawn", file:"oustidetriple.html", type:"smoke"},
         {name: "Outside 2x | Spawn", file:"outsidedouble.html", type:"smoke"},
         {name: "Front Red | Spawn", file:"oustidered.html", type:"smoke"},
         {name: "Red w biegu | Spawn", file:"redrun.html", type:"smoke"}
       ]
     },
-
   },
 
-
-
-
-      Ancient: {
+  Ancient: {
     wip: true,
     Callouts: [
-    { name: "Ancient", file: "ancient.html", type: "callouts" }
-        ],
-    TT: {
-      A: [],
-      B: [],
-      Mid: []
-    },
-    CT: { 
-      A: [], 
-      B: [], 
-      Mid: [] 
-    }
+      { name: "Ancient", file: "ancient.html", type: "callouts" }
+    ],
+    TT: { A: [], B: [], Mid: [] },
+    CT: { A: [], B: [], Mid: [] }
   },
 
-
-
-      Dust2: {
+  Dust2: {
     wip: true,
     Callouts: [
-    { name: "Dust2", file: "dust2.html", type: "callouts" }
-        ],
-    TT: {
-      A: [],
-      B: [],
-      Mid: []
-    },
-    CT: { 
-      A: [], 
-      B: [], 
-      Mid: [] 
-    }
+      { name: "Dust2", file: "dust2.html", type: "callouts" }
+    ],
+    TT: { A: [], B: [], Mid: [] },
+    CT: { A: [], B: [], Mid: [] }
   },
 
-      Train: {
+  Train: {
     wip: true,
     Callouts: [
-    { name: "Train", file: "train.html", type: "callouts" }
-        ],
-    TT: {
-      A: [],
-      B: [],
-      Mid: []
-    },
-    CT: { 
-      A: [], 
-      B: [], 
-      Mid: [] 
-    }
+      { name: "Train", file: "train.html", type: "callouts" }
+    ],
+    TT: { A: [], B: [], Mid: [] },
+    CT: { A: [], B: [], Mid: [] }
   }
 };
 
@@ -173,7 +136,6 @@ const activeFilters = {
   molo: true,
   flash: true,
   he: true,
-  multi: true
 };
 
 // --- Load HTML into details ---
@@ -193,40 +155,56 @@ function loadContent(map, sub, filename) {
     });
 }
 
+// --- Create position element (support multi-types) ---
+function createPositionElement(map, sub, posObj, h4) {
+  const li = document.createElement('li');
+  li.textContent = posObj.name;
 
-// --- Fill columns Callouts / TT / CT → A/B/Mid → Positions ---
+  // handle multiple types
+  if (Array.isArray(posObj.type)) {
+    li.classList.add(posObj.type[0]); // pierwszy typ -> kolor
+    li.dataset.types = posObj.type.join(",");
+  } else {
+    li.classList.add(posObj.type);
+    li.dataset.types = posObj.type;
+  }
+
+  li.addEventListener('click', () => {
+    loadContent(map, sub, posObj.file);
+
+    if(currentPosLi) currentPosLi.classList.remove('active-pos');
+    li.classList.add('active-pos');
+    currentPosLi = li;
+
+    if(h4 && currentSubH4 !== h4) {
+      if(currentSubH4) currentSubH4.classList.remove('active-sub');
+      h4.classList.add('active-sub');
+      currentSubH4 = h4;
+    }
+  });
+
+  return li;
+}
+
+// --- Fill columns Callouts / TT / CT ---
 function populatePositions(map) {
-  const sidesOrder = ['Callouts','TT','CT']; // Order including Callouts
+  const sidesOrder = ['Callouts','TT','CT'];
 
   sidesOrder.forEach(side => {
     const container = document.getElementById(side);
     container.innerHTML = '';
 
     const subSides = positionsData[map][side];
-    if(!subSides) return; // jeśli brak Callouts, przejdź dalej
+    if(!subSides) return;
 
-    // Jeśli Callouts nie ma sub-sekcji (TT/CT mają A/B/Mid)
     if(side === 'Callouts') {
       subSides.forEach(posObj => {
-        const li = document.createElement('li');
-        li.textContent = posObj.name;
-
-        if(posObj.type) li.classList.add(posObj.type);
-
-        li.addEventListener('click', () => {
-          loadContent(map, '', posObj.file); // sub pusty dla Callouts
-
-          if(currentPosLi) currentPosLi.classList.remove('active-pos');
-          li.classList.add('active-pos');
-          currentPosLi = li;
-        });
-
+        const li = createPositionElement(map, '', posObj, null);
         container.appendChild(li);
       });
       return;
     }
 
-    // --- Existing TT/CT logic ---
     for (const sub in subSides) {
       const h4 = document.createElement('h4');
       h4.textContent = sub;
@@ -234,25 +212,7 @@ function populatePositions(map) {
 
       const ul = document.createElement('ul');
       subSides[sub].forEach(posObj => {
-        const li = document.createElement('li');
-        li.textContent = posObj.name;
-
-        if(posObj.type) li.classList.add(posObj.type);
-
-        li.addEventListener('click', () => {
-          loadContent(map, sub, posObj.file);
-
-          if(currentPosLi) currentPosLi.classList.remove('active-pos');
-          li.classList.add('active-pos');
-          currentPosLi = li;
-
-          if(currentSubH4 !== h4) {
-            if(currentSubH4) currentSubH4.classList.remove('active-sub');
-            h4.classList.add('active-sub');
-            currentSubH4 = h4;
-          }
-        });
-
+        const li = createPositionElement(map, sub, posObj, h4);
         ul.appendChild(li);
       });
 
@@ -274,9 +234,8 @@ function populatePositions(map) {
     }
   });
 
-  applyFilters(); // Apply filters after filling columns
+  applyFilters();
 }
-
 
 // --- Map click ---
 document.querySelectorAll('.maps li').forEach(mapLi => {
@@ -291,64 +250,51 @@ document.querySelectorAll('.maps li').forEach(mapLi => {
   });
 });
 
-// --- AUTO: load first map (Mirage) ---
+// --- AUTO: load first map ---
 window.addEventListener('DOMContentLoaded', () => {
   const firstMapLi = document.querySelector('.maps li');
   if(firstMapLi) firstMapLi.click();
-  initFilters(); // Initialize filter buttons
+  initFilters();
 });
 
 // --- Filters ---
-// Initialize filter buttons
 function initFilters() {
   document.querySelectorAll('.filter-btn').forEach(btn => {
     const type = btn.dataset.type;
 
-    // Set initial appearance based on activeFilters
+    // --- jeżeli przycisk byłby "multi", to pomiń go (nie robimy filtra dla multi)
+    if (!(type in activeFilters)) return;
+
     if(!activeFilters[type]) btn.classList.add('inactive');
 
     btn.addEventListener('click', () => {
-      // Toggle filter
       activeFilters[type] = !activeFilters[type];
-
-      // Toggle button appearance
       btn.classList.toggle('inactive', !activeFilters[type]);
-
-      // Apply filter
       applyFilters();
     });
   });
 }
 
-// --- Apply filters ---
 function applyFilters() {
   document.querySelectorAll('.sides li').forEach(li => {
-    const classes = li.classList;
-    let visible = true;
+    const types = li.dataset.types ? li.dataset.types.split(",") : [];
+    const matches = types.some(type => activeFilters[type]);
 
-    if(classes.contains('smoke') && !activeFilters.smoke) visible = false;
-    if(classes.contains('molo') && !activeFilters.molo) visible = false;
-    if(classes.contains('flash') && !activeFilters.flash) visible = false;
-    if(classes.contains('he') && !activeFilters.he) visible = false;
-    if(classes.contains('multi') && !activeFilters.multi) visible = false;
-
-    li.style.display = visible ? '' : 'none';
+    li.style.display = matches ? '' : 'none';
   });
 }
 
-
-// --- For work in progress map add icon on the righ ---
-
+// --- For WIP maps add icon ---
 document.querySelectorAll('.maps li').forEach(mapLi => {
   const mapName = mapLi.textContent;
   const mapData = positionsData[mapName];
 
   if(mapData && mapData.wip) {
-    mapLi.classList.add('wip-map'); // klasa WIP
+    mapLi.classList.add('wip-map');
     const icon = document.createElement('span');
-    icon.textContent = '👷'; // kask
+    icon.textContent = '👷';
     icon.classList.add('wip-icon');
-    mapLi.appendChild(icon); // dodajemy na koniec li
+    mapLi.appendChild(icon);
   }
 
   mapLi.addEventListener('click', () => {
