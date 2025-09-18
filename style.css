@@ -118,9 +118,20 @@ h1 { margin-left: 20px; }
   border-radius: 4px;
   margin-bottom: 6px;
   padding: 6px 10px;
-  transition: all 0.2s ease;
-  overflow: visible; 
   transform-origin: left center;
+
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+  max-height: 100px; /* wysokość większa niż element */
+  overflow: hidden;
+}
+
+.sides ul li.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  max-height: 0;
+  pointer-events: none;
 }
 .sides ul li:hover { opacity: 0.85; box-shadow: 0 0 8px rgba(255,255,255,0.2); transform: scale(1.03); }
 .sides ul li.active-pos {

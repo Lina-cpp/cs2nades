@@ -249,10 +249,15 @@ function initFilters(){
   });
 }
 
-function applyFilters(){
-  document.querySelectorAll('.sides li').forEach(li=>{
-    const types = li.dataset.types?li.dataset.types.split(','):[];
-    li.style.display=types.some(type=>activeFilters[type])?'':'none';
+function applyFilters() {
+  document.querySelectorAll('.sides li').forEach(li => {
+    const types = li.dataset.types ? li.dataset.types.split(',') : [];
+
+    if (types.some(type => activeFilters[type])) {
+      li.classList.remove("hidden");
+    } else {
+      li.classList.add("hidden");
+    }
   });
 }
 
