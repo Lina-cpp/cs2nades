@@ -104,12 +104,31 @@ const positionsData = {
   },
 
   Ancient: {
-    wip: true,
     Callouts: [
       { name: "Ancient", file: "ancient.html", type: "callouts" }
     ],
-    TT: { A: [], B: [], Mid: [] },
-    CT: { A: [], B: [], Mid: [] }
+    TT: { 
+      A: 
+      [
+        { name: "Cave/CT/Donut - 1 spot | Stairs", file: "AStairs3Smokes.html", type:"smoke" },
+        { name: "CT | Elbow", file: "ctfromelbow.html", type:"smoke"}
+      ],
+      B: 
+      [
+        { name: "Long/Short/Cave & Mid + Ninja Molo | Ruins", file:"bmultismokes.html", type:["multi", "smoke", "molo"]}
+      ],
+       Mid:
+        [
+          { name: "Red Room + Donut | Spawn", file: "midfromspawn.html", type:"smoke"},
+          { name: "Red Room | Elbow", file:"elbowtoredroom.html", type:"smoke"},
+          { name: "Donut | Elbow", file: "donutfromelbow.html", type:"smoke"},
+          { name: "Heaven | Elbow", file: "heavenfromelbow.html", type:"smoke"}
+        ] },
+    CT: {
+      B: 
+      [
+        { name: "Molo+He na rampe | Alley", file: "moloheramp.html", type:["multi", "molo", "he"]}
+      ]}
   },
 
 
