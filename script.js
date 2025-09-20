@@ -148,29 +148,29 @@ const positionsData = {
         { name: "Long Sniper Peek | Double Doors Front", file:"sniperpeeksmoke.html", type:"smoke"},
         { name: "Long Flash | Double Doors Front", file:"alongbestflash.html", type:"flash"},
       ],
-      B: [], Mid: [] },
+      B:
+      [
+        { name: "Doors (fast) | T Plat ", file:"doorsfromplat.html", type:"smoke"},
+        { name: "Doors | T Plat ", file:"platdoors.html", type:"smoke"},
+        { name: "Doors&Window | Front Tunnels", file:"windowsanddoors.html", type:"smoke"},
+        { name: "Doors | Upper Tunnel", file:"drzwiztuneli.html", type:"smoke"}
+      ], 
+      Mid:
+      [
+        { name: "Xbox | Spawn", file:"xboxsmoke.html", type:"smoke"},
+        { name: "Whole CT | Xbox", file:"ctfromxbox.html", type:"smoke"}
+      ] },
     CT: { 
       A:
       [
-        { name:"Double Doors | Short Boost", file:"cttodoubledoors.html", type:"smoke"}
+        { name: "Double Doors | Short Boost", file:"cttodoubledoors.html", type:"smoke"}
       ],
-      B: [], Mid: [] }
+      B:
+      [
+        { name: "Flash na tunele | Site", file:"tunnelflash.html", type:"flash"}
+      ],}
   },
 
-
-
-
-
-
-
-  Train: {
-    wip: true,
-    Callouts: [
-      { name: "Train", file: "train.html", type: "callouts" }
-    ],
-    TT: { A: [], B: [], Mid: [] },
-    CT: { A: [], B: [], Mid: [] }
-  }
 };
 
 
