@@ -31,18 +31,18 @@ const positionsData = {
     TT: {
       A: [
         { name: "OneWay Site | Aps", file: "pos2.html", type:"smoke" },
-        { name: "Before Biblia", file: "beforebilblia.html", type:"smoke"},
-        { name: "Pit Smoke", file: "pitsmoke.html", type:"smoke"}
+        { name: "Przed Biblioteke | Mid", file: "beforebilblia.html", type:"smoke"},
+        { name: "Pit Smoke | Mid", file: "pitsmoke.html", type:"smoke"}
       ],
       B: [
-        { name: "Spawn to CT", file: "ctsmoke4.html", type:"smoke"},
-        { name: "CT+Boost", file: "ctsmokeandboost.html", type:"smoke"},
-        { name: "Coffin", file: "bcoffin.html", type:"smoke"},
-        { name: "Car multinades", file:"bcartositenades.html", type:["multi","molo","he","flash"] }
+        { name: "CT | T Ramp", file: "ctsmoke4.html", type:"smoke"},
+        { name: "CT+Boost | T Ramp", file: "ctsmokeandboost.html", type:"smoke"},
+        { name: "Coffin | Banan", file: "bcoffin.html", type:"smoke"},
+        { name: "B multinades | Car", file:"bcartositenades.html", type:["multi","molo","he","flash"] }
       ],
       Mid: [
-        {name: "Mid smoke", file: "midsmoke.html", type:"smoke"},
-        {name: "Short smoke", file: "shortsmoke.html", type:"smoke"}
+        {name: "Mid | T Ramp", file: "midsmoke.html", type:"smoke"},
+        {name: "Short | T Ramp", file: "shortsmoke.html", type:"smoke"}
       ]
     },
     CT: { 
