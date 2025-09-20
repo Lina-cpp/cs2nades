@@ -137,12 +137,24 @@ const positionsData = {
 
 
   Dust2: {
-    wip: true,
     Callouts: [
       { name: "Dust2", file: "dust2.html", type: "callouts" }
     ],
-    TT: { A: [], B: [], Mid: [] },
-    CT: { A: [], B: [], Mid: [] }
+    TT: { 
+      A:
+      [
+        { name: "Cross - only 1 smoke | Double Doors Front", file:"acrosssmoke.html", type:"smoke"},
+        { name: "CT | Short", file:"ctfromshort.html", type:"smoke"},
+        { name: "Long Sniper Peek | Double Doors Front", file:"sniperpeeksmoke.html", type:"smoke"},
+        { name: "Long Flash | Double Doors Front", file:"alongbestflash.html", type:"flash"},
+      ],
+      B: [], Mid: [] },
+    CT: { 
+      A:
+      [
+        { name:"Double Doors | Short Boost", file:"cttodoubledoors.html", type:"smoke"}
+      ],
+      B: [], Mid: [] }
   },
 
 
