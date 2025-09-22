@@ -21,6 +21,10 @@ const positionsData = {
       A: [
         { name: "Short Ignite | Stairs", file: "shortmolo.html", type: "molo"}
       ],
+      B:
+      [
+
+      ],
       Mid:
       [
         {name: "CT oneway | Mid", file: "ctoneway.html", type:"smoke"}
