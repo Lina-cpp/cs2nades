@@ -21,13 +21,13 @@ const positionsData = {
       A: [
         { name: "Short Ignite | Stairs", file: "shortmolo.html", type: "molo"}
       ],
-      B:
-      [
 
-      ],
       Mid:
       [
-        {name: "CT oneway | Mid", file: "ctoneway.html", type:"smoke"}
+        {name: "CT oneway | Sniper's Nest", file: "ctoneway.html", type:"smoke"},
+        {name: "Another CT oneway | CT Spawn", file:"anotheroneway.html", type:"smoke"},
+        {name: "Anty-rush mid | Spawn", file:"antyrush.html", type:"smoke"}
+     
       ]
   },
 },
@@ -155,6 +155,7 @@ const positionsData = {
         { name: "CT | Short", file:"ctfromshort.html", type:"smoke"},
         { name: "Long Sniper Peek | Double Doors Front", file:"sniperpeeksmoke.html", type:"smoke"},
         { name: "Long Flash | Double Doors Front", file:"alongbestflash.html", type:"flash"},
+        { name: "Solo Flash Double Doors | Double doors", file:"soloflashdoubledoors.html", type:"flash"}
       ],
       B:
       [
