@@ -58,7 +58,8 @@ const positionsData = {
         {name: "Oneway | Long", file: "longoneway.html", type:"smoke"}
       ],
       B: [
-        {name: "B Smokes | Well", file: "ctsitenades.html", type:"smoke"}
+        {name: "B Smokes | Well", file: "ctsitenades.html", type:"smoke"},
+        {name:"Banana Oneway | Car", file:"bananaonewayct.html", type:"smoke"}
       ] }
   },
 
