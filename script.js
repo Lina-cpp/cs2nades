@@ -32,6 +32,11 @@ const positionsData = {
   },
 },
 
+
+
+
+
+
   Inferno: {
     Callouts: [
       { name: "Inferno", file: "infernomap.html", type: "callouts" }
@@ -59,9 +64,14 @@ const positionsData = {
       ],
       B: [
         {name: "B Smokes | Well", file: "ctsitenades.html", type:"smoke"},
-        {name:"Banana Oneway | Car", file:"bananaonewayct.html", type:"smoke"}
+        {name:"Banana Oneway | Car", file:"bananaonewayct.html", type:"smoke"},
+        {name: "Double Ignite Car + He | 1st", file:"ctcarignites.html", type:["multi","molo", "he"]}
       ] }
   },
+
+
+
+
 
   Overpass: {
     Callouts: [
