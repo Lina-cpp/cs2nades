@@ -178,7 +178,12 @@ const positionsData = {
       B:
       [
         { name: "Flash na tunele | Site", file:"tunnelflash.html", type:"flash"}
-      ],}
+      ],
+      Mid: 
+      [
+        {name: "Short oneway | Short Boost", file:"onewayshort.html", type:"smoke"}
+      ]
+    }
   },
 
 };
