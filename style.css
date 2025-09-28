@@ -318,3 +318,145 @@ li.callouts.active-pos { background: linear-gradient(90deg, #ff66aa, #ff33aa); c
     transform: translateY(0);
   }
 }
+
+
+
+
+
+/* -------------------------------------- */
+/* --- Commands page --- */
+/* -------------------------------------- */
+.commands-page {
+  padding: 30px;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+}
+
+.commands-page h2 {
+  font-size: 40px;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #66ccff;
+}
+
+.commands-container {
+  padding: 20px;
+  font-family: monospace;
+  color: #e0e0e0;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* --- Section headers --- */
+.commands-container h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 26px;
+  color: #88ddff;
+  border-left: 4px solid #66ccff; /* blue bar */
+  padding-left: 10px;
+}
+
+/* --- Command row --- */
+.cmd-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.cmd-row:hover {
+  background: #242b3d;
+  transform: scale(1.01);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* --- Command name / left column --- */
+.cmd-name {
+  min-width: 350px; /* all commands aligned */
+  max-width: 350px;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap; /* allow wrapping for long commands */
+}
+
+/* --- Command code / highlighted box --- */
+.cmd-code {
+  font-family: monospace;
+  font-size: 16px;
+  background: #111625;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #33384a;
+  white-space: pre-wrap; /* allow line break */
+  word-break: break-word; /* wrap long words */
+  flex: 1;
+}
+
+/* --- Command description / right column --- */
+.cmd-desc {
+  flex: 1;
+  font-size: 20px;
+  color: #dddddd;
+  line-height: 1.4;
+  display: flex;
+  align-items: center
+}
+
+
+
+
+
+/*--- Pop Up ---*/
+
+.copy-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: linear-gradient(135deg, #222831, #393e46);
+  color: #fff;
+  padding: 18px 32px;
+  border-radius: 14px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10000;
+  min-width: 280px;
+  text-align: center;
+}
+
+.copy-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.copy-popup h4 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  color: #00ff44;  /* zielony nagłówek Sukces! */
+  text-shadow: 1px 1px 2px black; /* czarna obwódka */
+}
+
+.copy-popup p {
+  margin: 0;
+  font-size: 14px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px black; /* czarna obwódka */
+}
+
+.copy-popup .progress-bar {
+  height: 4px;
+  background: rgba(0, 255, 136, 0.7);  /* zielony pasek */
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 2px;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 0.1s linear;
+}
+

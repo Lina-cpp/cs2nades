@@ -203,6 +203,12 @@ const details = document.querySelector('.details');
 const sides = document.querySelector('.sides');
 const mapItems = document.querySelectorAll('.maps li');
 
+// Standalone pages (no .sides)
+const STANDALONE_PAGES = {
+  'Home': 'maps/home.html',
+  'Komendy': 'maps/additionalpages/commands.html'
+};
+
 let currentMapLi = null;
 let currentSubH4 = null;
 let currentPosLi = null;
@@ -237,11 +243,6 @@ function createPositionElement(map, sub, posObj, h4){
 }
 
 function populatePositions(mapName){
-  if(mapName==='Home'){
-    sides.classList.remove('show'); // ukryj .sides
-    loadContent('maps/home.html'); // ładuj home.html
-    return;
-  }
 
   if(hasPositions(mapName)) sides.classList.add('show'); else sides.classList.remove('show');
 
@@ -282,15 +283,31 @@ function populatePositions(mapName){
   applyFilters();
 }
 
-// --- Map click ---
-mapItems.forEach(mapLi=>{
-  mapLi.addEventListener('click',()=>{
-    if(currentMapLi) currentMapLi.classList.remove('active-map');
-    mapLi.classList.add('active-map'); currentMapLi=mapLi;
-    const mapName = mapLi.textContent;
+// --- Map click (fixed for standalone pages) ---
+mapItems.forEach(mapLi => {
+  mapLi.addEventListener('click', () => {
+    // Remove highlight from previous map
+    if (currentMapLi) currentMapLi.classList.remove('active-map');
+    mapLi.classList.add('active-map');
+    currentMapLi = mapLi;
+
+    const mapName = mapLi.textContent.trim();
+
+    // If it's a standalone page (Home / Komendy) – don't use populatePositions
+    if (STANDALONE_PAGES[mapName]) {
+      sides.classList.remove('show'); // hide sidebar
+      loadContent(STANDALONE_PAGES[mapName]); // load standalone page
+      return;
+    }
+
+    // Otherwise it's a normal map → use existing logic
     populatePositions(mapName);
   });
 });
+
+
+
+
 
 function initFilters(){
   document.querySelectorAll('.filter-btn').forEach(btn=>{
@@ -343,5 +360,83 @@ function updateWipIcons() {
   });
 }
 
-// wywołaj przy starcie i po każdej zmianie map
+
 updateWipIcons();
+
+
+
+
+
+// popup
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.details');
+  if (!container) return;
+
+
+  const popup = document.createElement('div');
+  popup.className = 'copy-popup';
+  popup.innerHTML = `
+    <h4>Sukces!</h4>
+    <p>Użyj CTRL + V aby wkleić komendę</p>
+    <div class="progress-bar"></div>
+  `;
+  document.body.appendChild(popup);
+
+  const progress = popup.querySelector('.progress-bar');
+  let popupTimeout = null;
+  let start = null;
+  const duration = 3000;
+
+  function showPopup() {
+
+    popup.classList.add('show');
+    popup.style.opacity = '1';
+    popup.style.transform = 'translateX(-50%) translateY(0)';
+
+    progress.style.transform = 'scaleX(1)';
+    start = null;
+
+    if (popupTimeout) clearTimeout(popupTimeout);
+
+
+    function animateProgress(timestamp) {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const scale = 1 - (elapsed / duration);
+      progress.style.transform = `scaleX(${Math.max(scale, 0)})`;
+      if (elapsed < duration) {
+        requestAnimationFrame(animateProgress);
+      } else {
+        popup.classList.remove('show');
+        setTimeout(() => popup.style.opacity = '0', 200);
+      }
+    }
+    requestAnimationFrame(animateProgress);
+
+
+    popupTimeout = setTimeout(() => {
+      popup.classList.remove('show');
+      setTimeout(() => popup.style.opacity = '0', 200);
+    }, duration);
+  }
+
+
+  container.addEventListener('click', e => {
+    const cmd = e.target.closest('.cmd-code');
+    if (!cmd) return;
+
+   
+    navigator.clipboard.writeText(cmd.textContent)
+      .then(() => {
+        
+        const originalBg = cmd.style.backgroundColor || '#111625';
+        cmd.style.backgroundColor = '#3399ff';
+        setTimeout(() => cmd.style.backgroundColor = originalBg, 200);
+
+       
+        showPopup();
+      })
+      .catch(err => console.error('Copy failed:', err));
+  });
+});
+
