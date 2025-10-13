@@ -60,7 +60,8 @@ const positionsData = {
     },
     CT: { 
       A: [
-        {name: "Oneway | Long", file: "longoneway.html", type:"smoke"}
+        {name: "Oneway | Long", file: "longoneway.html", type:"smoke"},
+        {name: "Oneway | Short", file: "shortneway.html", type:"smoke"}
       ],
       B: [
         {name: "B Smokes | Well", file: "ctsitenades.html", type:"smoke"},
@@ -82,6 +83,7 @@ const positionsData = {
         {name: "Kible | Spawn", file: "kiblespawn.html", type: "smoke"},
         {name: "Kible | Playground", file: "playgroundkible.html", type: "smoke"},
         {name: "Bank&Śmietnik | Fenix", file: "banksmietnik.html", type: "smoke"},
+        {name: "Bank&Śmietnik | Fenix", file: "adoublesmokebench.html", type: "smoke"},
         {name: "Śmietnik Smoke + Optimus Ignite | Kible", file: "multikible.html", type:["multi", "smoke", "molo"]},
         {name: "Bank | Long", file: "banklongsmoke.html", type: "smoke"},
         {name: "Śmietnik + Molo Optimus | Long", file: "longmultinades.html", type:["multi", "smoke", "molo"]},
