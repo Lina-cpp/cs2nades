@@ -8,29 +8,57 @@
 </head>
 <body>
 
-<h2>CS2 Nades - v1.1.1</h2>
+<h2>CS2 Nades - v1.3.0</h2>
 
 <div class="container">
 
-  <!-- Maps -->
+  <!-- Maps column -->
   <div class="col maps">
     <ul>
-      </br></br></br>
-      <li>Home</li> </br>
-      <li>Mirage</li>
-      <li>Inferno</li>
-      <li>Overpass</li>
-      <li>Nuke</li>
-      <li>Ancient</li>
-      <li>Dust2</li>
+      <br><br><br>
+      <li data-map="Home">Home</li> <br>
+      <li data-map="Mirage">
+        <img class="map-thumb" src="thumbs/mirage.webp" alt="">
+        Mirage
+      </li>
+      <li data-map="Inferno">
+        <img class="map-thumb" src="thumbs/inferno.webp" alt="">
+        Inferno
+      </li>
+      <li data-map="Overpass">
+        <img class="map-thumb" src="thumbs/overpass.webp" alt="">
+        Overpass
+      </li>
+      <li data-map="Nuke">
+        <img class="map-thumb" src="thumbs/nuke.webp" alt="">
+        Nuke
+      </li>
+      <li data-map="Ancient">
+        <img class="map-thumb" src="thumbs/ancient.webp" alt="">
+        Ancient
+      </li>
+      <li data-map="Dust2">
+        <img class="map-thumb" src="thumbs/dust2.webp" alt="">
+        Dust2
+      </li>
+      <li data-map="Anubis">
+        <img class="map-thumb" src="thumbs/anubis.webp" alt="">
+        Anubis
+      </li>
       <br>
-      <li>Komendy</li>
+      <li data-map="Komendy">Komendy</li>
     </ul>
   </div>
 
-  <!-- Second Column: TT/CT & A/B/Mid -->
+  <!-- Sidebar: TT/CT + callouts -->
   <div class="col sides">
-    <!-- Filter buttons -->
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <input id="sidebar-search" type="text" placeholder="🔍 Szukaj..." autocomplete="off">
+    </div>
+
+    <!-- Filters -->
     <h3 class="filters-title">Filtry:</h3>
     <div class="filters">
       <button class="filter-btn filter-smoke active" data-type="smoke">Smoke</button>
@@ -43,19 +71,56 @@
     <h3>Mapa + miejscówki</h3>
     <div class="subside" id="Callouts"></div>
 
-    <h3>TT</h3>
-    <div class="subside" id="TT"></div>
+    <!-- TT section with collapse toggle -->
+    <div class="side-section" id="section-TT">
+      <h3>
+        TT
+        <button class="section-toggle" title="Zwiń/rozwiń">▾</button>
+      </h3>
+      <div class="section-body">
+        <div class="subside" id="TT"></div>
+      </div>
+    </div>
 
-    <h3>CT</h3>
-    <div class="subside" id="CT"></div>
+    <!-- CT section with collapse toggle -->
+    <div class="side-section" id="section-CT">
+      <h3>
+        CT
+        <button class="section-toggle" title="Zwiń/rozwiń">▾</button>
+      </h3>
+      <div class="section-body">
+        <div class="subside" id="CT"></div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Column 3 - details -->
+  <!-- Details column -->
   <div class="col details">
   </div>
 
 </div>
 
+<!-- Breadcrumb bar -->
+<div id="breadcrumb-bar">
+  <div id="breadcrumb"></div>
+</div>
+
+<!-- History panel -->
+<div id="history-panel">
+  <div id="history-header">
+    <span>🕐 Ostatnio oglądane</span>
+    <button id="history-toggle">▾</button>
+  </div>
+  <ul id="history-list"></ul>
+</div>
+
 <script src="script.js"></script>
+<script>
+  // History panel toggle
+  document.getElementById('history-toggle').addEventListener('click', () => {
+    document.getElementById('history-panel').classList.toggle('collapsed');
+  });
+</script>
 </body>
 </html>
